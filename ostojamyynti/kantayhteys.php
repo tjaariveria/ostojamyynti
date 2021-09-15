@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf8');
 $servername = "localhost";
 $username = "root";
 $password = "koira123";
-$database = "tietokanta";
+$database = "ostojamyynti";
 
 // Create connection
 $dbconnect= new mysqli($servername, $username, $password, $database);

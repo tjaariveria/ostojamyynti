@@ -77,7 +77,7 @@ include("kantayhteys.php");
                                 <div class='td'><input type='text' name='kayttaja_uusisahkoposti' value='$sahkoposti'></div>
                             </div>
                             <div class='tr'>
-                                <div class='td'><input type='hidden' name='kayttaja_kayttaja' value='$tunnus'></div>
+                                <div class='td'><input type='hidden' name='kayttaja_tunnus' value='$tunnus'></div>
                                 <div class='td'><input type='hidden' name='lomaketunnistin' value='2'></div>
                             </div>
                             <div class='tr'>

@@ -1,9 +1,9 @@
 <?php
 session_start();
 include("kantayhteys.php");
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="fi">
@@ -20,7 +20,7 @@ include("kantayhteys.php");
     <div class="content">
         <?php
         $sivu = mysqli_real_escape_string($dbconnect, $_POST['lomaketunnistin']);
-        $kayttaja_tunnus = mysqli_real_escape_string($dbconnect, $_POST['kayttaja_kayttaja']);
+        $kayttaja_tunnus = mysqli_real_escape_string($dbconnect, $_POST['kayttaja_tunnus']);
         //$kayttaja_salasana = md5(mysqli_real_escape_string($dbconnect, $_POST['kayttaja_salasana']));
         $kayttaja_salasana = password_hash($_POST['kayttaja_salasana'], PASSWORD_DEFAULT);
 
@@ -35,10 +35,13 @@ include("kantayhteys.php");
                 if (mysqli_num_rows($query) !== 0) {
                     die("Tunnus on jo käytössä! <br><a href='rekisterointi.html'>Yritä uudelleen</a>.");
                 } else {
-                    $query = mysqli_query($dbconnect, "INSERT INTO kayttajat (kayttaja_id, kayttaja_taso, kayttaja_tunnus, kayttaja_salasana, kayttaja_sahkoposti) 
-                VALUES (NULL, 'user', '$kayttaja_tunnus', '$kayttaja_salasana', '$kayttaja_sahkoposti')");
-                }
+                    $query = mysqli_query($dbconnect, "INSERT INTO kayttajat (kayttaja_taso, kayttaja_tunnus, kayttaja_salasana, kayttaja_sahkoposti) 
+                VALUES ('user', '$kayttaja_tunnus', '$kayttaja_salasana', '$kayttaja_sahkoposti')");
                 echo "Rekisteröinti onnistui! <br><a href='kirjautuminen.html'>Kirjaudu sisälle</a> palveluun.";
+                }
+                
+                
+                
             }
             mysqli_close($dbconnect);
         }

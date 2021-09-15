@@ -1,0 +1,32 @@
+.content {
+    margin: 0px auto;
+    padding: 10px;
+    background-color: #333;
+    width: 1300px;
+    min-height: 100%;
+}
+
+.content .banner {
+    margin-bottom: 7px;
+    margin-top: 10px;
+    background-color: #454545;
+    width: 1280px;
+}
+
+.content section:last-of-type {
+    margin-bottom: 48px;
+}
+
+@media screen and (max-width: 1335px) {
+    .content {
+        width: auto;
+    }
+    .content .banner {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 330px) {
+    .content {
+        padding: 5px;
+    }
+}

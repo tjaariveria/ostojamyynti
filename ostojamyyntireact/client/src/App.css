@@ -1,18 +1,15 @@
-.App {
-  text-align: center;
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.submit-form {
+  max-width: 300px;
+  margin: auto;
 }
 
-.form input {
-  width: 300px;
-  height: 60px;
-  margin: 10px;
-  font-size: 25px;
-
+.edit-form {
+  max-width: 300px;
+  margin: auto;
 }

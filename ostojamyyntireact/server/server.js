@@ -1,5 +1,7 @@
 const mariadb = require('mariadb');
-const pool = mariadb.createPool({host: localhost, user: root, connectionLimit: 5});
+const awsHost = "localhost";
+const root = "root";
+const pool = mariadb.createPool({host: awsHost, user: root, connectionLimit: 5});
 
 async function asyncFunction() {
   let conn;

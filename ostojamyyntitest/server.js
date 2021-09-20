@@ -86,5 +86,15 @@ app.post('/ilmoitukset', async (req, res) => {
     }
 });
  
+// DELETE
+app.delete('/ilmoitukset', async (req, res) => {
+    let id = req.body;
+    try {
+        const result = await db.pool.query("delete from ilmoitukset where ilmoitus_id = ? and ilmoittaja_id = ?", [id.ilmoitus_id, id.ilmoittaja_id]);
+        res.send(result);
+    } catch (err) {
+        throw err;
+    } 
+});
  
 app.listen(port, () => console.log(`Listening on port ${port}`));

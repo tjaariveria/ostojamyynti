@@ -1,9 +1,8 @@
 // Use the MariaDB Node.js Connector
-var mariadb = require('mariadb');
+const mariadb = require('mariadb');
  
 // Create a connection pool
-var pool = 
-  mariadb.createPool({
+const pool = mariadb.createPool({
     host: "ec2-13-49-240-177.eu-north-1.compute.amazonaws.com", 
     user: "root", 
     password: "my-new-password",

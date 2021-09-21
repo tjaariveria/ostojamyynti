@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DataService from "./services/Services";
+
+
+
 
 const Rekisteroidu = () => {
   const initialKayttajaState = {
@@ -10,10 +13,27 @@ const Rekisteroidu = () => {
   };
   const [kayttaja, setKayttaja] = useState(initialKayttajaState);
   const [submitted, setSubmitted] = useState(false);
+  const [canSubmit, setCanSubmit] = useState(false);
+
+
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;    
+    event.preventDefault();
+    const { name, value } = event.target;       
     setKayttaja({ ...kayttaja, [name]: value });
+    DataService.getKayttajat()
+    .then((res) => {      
+      res.data.map(e => {
+      if(e.kayttaja_tunnus === event.target.value) {
+        setCanSubmit(false);
+        
+      } else {
+        setCanSubmit(true);
+      }
+      return '';
+    })
+    })
+    
   };
 
   const saveKayttaja = () => {
@@ -24,7 +44,9 @@ const Rekisteroidu = () => {
       kayttaja_sahkoposti: kayttaja.kayttaja_sahkoposti      
     };
 
-    DataService.createKayttaja(data)
+    
+
+    DataService.createKayttaja(data)    
       .then((response) => {
         setKayttaja({
           kayttaja_taso: response.data.kayttaja_taso,
@@ -83,6 +105,7 @@ const Rekisteroidu = () => {
               onChange={handleInputChange}
               name="kayttaja_tunnus"
             />
+            <span>{!canSubmit ? 'username already in use!' : ''}</span>
           </div>
 
           <div className="form-group">
@@ -111,7 +134,7 @@ const Rekisteroidu = () => {
             />
           </div>
 
-          <button onClick={saveKayttaja} className="btn btn-success">
+          <button disabled={!canSubmit} onClick={saveKayttaja} className="btn btn-success">
             Register
           </button>
         </div>

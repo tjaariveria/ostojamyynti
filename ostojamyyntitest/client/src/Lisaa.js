@@ -3,7 +3,6 @@ import DataService from "./services/Services";
 
 const Lisaa = () => {
   const initialIlmoitusState = {
-    ilmoitus_id: null,
     ilmoitus_laji: "",
     ilmoitus_nimi: "",
     ilmoitus_kuvaus: "",
@@ -20,7 +19,6 @@ const Lisaa = () => {
 
   const saveIlmoitus = () => {
     const data = {
-        ilmoitus_id: ilmoitus.ilmoittaja_id,
       ilmoitus_laji: ilmoitus.ilmoitus_laji,
       ilmoitus_nimi: ilmoitus.ilmoitus_nimi,
       ilmoitus_kuvaus: ilmoitus.ilmoitus_kuvaus,
@@ -30,10 +28,9 @@ const Lisaa = () => {
     };
     console.log("data saveIlm: " + ilmoitus.ilmoitus_nimi);
 
-    DataService.create(data)
+    DataService.createIlmoitus(data)
       .then((response) => {
         setIlmoitus({
-            ilmoitus_id: response.data.ilmoitus_id,
           ilmoitus_laji: response.data.ilmoitus_laji,
           ilmoitus_nimi: response.data.ilmoitus_nimi,
           ilmoitus_kuvaus: response.data.ilmoitus_kuvaus,
@@ -64,19 +61,7 @@ const Lisaa = () => {
         </div>
       ) : (
         <div>
-            <div className="form-group">
-          <label htmlFor="ilmoitus_id">Ilmoitus id</label>
-          <input
-            type="text"
-            name="ilmoitus_id"
-            className="form-control"
-            id="ilmoitus_id"
-            required
-            value={ilmoitus.ilmoitus_id}
-            placeholder="ilmoitus id"
-            onChange={handleInputChange}
-          />
-        </div>
+            
           <div className="form-group">
             <label htmlFor="ilmoitus_laji">Ilmoitus laji</label>
             <input

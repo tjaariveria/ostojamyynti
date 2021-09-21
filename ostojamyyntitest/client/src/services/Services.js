@@ -8,12 +8,15 @@ class DataService {
   getKayttajat() {
     return http.get(`/kayttajat`);
   }
+  createKayttaja(data) {
+    return http.post("/kayttajat", data);
+  }
 
   getIlmoitukset() {
     return http.get(`/ilmoitukset`);
   }
 
-  create(data) {
+  createIlmoitus(data) {
     console.log("data servicesta: " + data);
     return http.post("/ilmoitukset", data);
   }

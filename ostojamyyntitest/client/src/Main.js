@@ -4,6 +4,7 @@ import Koti from "./Koti";
 import Listaa from "./Listaa";
 import Lisaa from "./Lisaa";
 import Rekisteroidu from "./Rekisteroidu";
+import Kirjautuminen from "./Kirjautuminen";
 // import Login from "./Login";
 // import LoginForm from './components/LoginForm';
 
@@ -16,9 +17,7 @@ const Main = () => {
 
       <ul className="header">
         <li>
-          <NavLink exact to="/">
-            Koti
-          </NavLink>
+          <NavLink exact to="/">Koti</NavLink>
         </li>
         <li>
           <NavLink to="/rekisteroidu">Rekisteröidy palveluun</NavLink>
@@ -29,6 +28,9 @@ const Main = () => {
         <li>
           <NavLink to="/lisaa">Lisää ilmoitus</NavLink>
         </li>
+        <li className="kirjautuminen">
+        <NavLink to="/kirjautuminen">Kirjaudu sisään</NavLink>
+        </li>
       </ul>
 
       <div className="content">
@@ -36,6 +38,7 @@ const Main = () => {
         <Route path="/rekisteroidu" component={Rekisteroidu} />
         <Route path="/listaa" component={Listaa} />
         <Route path="/lisaa" component={Lisaa} />
+        <Route path="/kirjautuminen" component={Kirjautuminen} />
       </div>
     </BrowserRouter>
   );

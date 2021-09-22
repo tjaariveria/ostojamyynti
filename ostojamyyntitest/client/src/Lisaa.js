@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DataService from "./services/Services";
 
-
 const Lisaa = () => {
   const initialIlmoitusState = {
     ilmoitus_laji: "",
@@ -11,13 +10,13 @@ const Lisaa = () => {
     ilmoittaja_id: "",
   };
 
-  let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  let date = new Date().toISOString().slice(0, 19).replace("T", " ");
 
   const [ilmoitus, setIlmoitus] = useState(initialIlmoitusState);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;    
+    const { name, value } = event.target;
     setIlmoitus({ ...ilmoitus, [name]: value });
   };
 
@@ -27,7 +26,7 @@ const Lisaa = () => {
       ilmoitus_nimi: ilmoitus.ilmoitus_nimi,
       ilmoitus_kuvaus: ilmoitus.ilmoitus_kuvaus,
       ilmoitus_paivays: date,
-      ilmoittaja_id: ilmoitus.ilmoittaja_id      
+      ilmoittaja_id: ilmoitus.ilmoittaja_id,
     };
 
     DataService.createIlmoitus(data)
@@ -62,71 +61,54 @@ const Lisaa = () => {
         </div>
       ) : (
         <div>
-            
           <div className="form-group">
             <label htmlFor="ilmoitus_laji">Ilmoitus laji</label>
-            <input
-              type="text"
+            <select
               name="ilmoitus_laji"
               className="form-control"
-              id="ilmoitus_laji"
-              required
-              value={ilmoitus.ilmoitus_laji}
-              placeholder="ilmoitus laji"
               onChange={handleInputChange}
-              
-            />
+            >
+              <option selected value={"1"}>
+                Myynti
+              </option>
+              <option value={"2"}>Osto</option>
+            </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="ilmoitus_nimi">Ilmoitus nimi</label>
             <input
+            name="ilmoitus_nimi"
               type="text"
               className="form-control"
-              id="ilmoitus_nimi"
               required
               value={ilmoitus.ilmoitus_nimi}
-              onChange={handleInputChange}
-              name="ilmoitus_nimi"
+              onChange={handleInputChange}              
             />
           </div>
 
           <div className="form-group">
             <label htmlFor="ilmoitus_kuvaus">Ilmoitus kuvaus</label>
             <input
+            name="ilmoitus_kuvaus"
               type="text"
               className="form-control"
-              id="ilmoitus_kuvaus"
               required
               value={ilmoitus.ilmoitus_kuvaus}
-              onChange={handleInputChange}
-              name="ilmoitus_kuvaus"
+              onChange={handleInputChange}              
             />
           </div>
-          
-          {/* <div className="form-group">
-            <label htmlFor="ilmoitus_paivays">Ilmoitus paivays</label>
-            <input
-              type="date"
-              className="form-control"
-              id="ilmoitus_paivays"
-              required
-              value={ilmoitus.ilmoitus_paivays}
-              onChange={handleInputChange}
-              name="ilmoitus_paivays"
-            />
-          </div> */}
 
           <div className="form-group">
             <label htmlFor="ilmoittaja_id">Ilmoittaja id</label>
             <input
+            name="ilmoittaja_id"
               type="text"
               className="form-control"
-              id="ilmoittaja_id"
               required
               value={ilmoitus.ilmoittaja_id}
               onChange={handleInputChange}
-              name="ilmoittaja_id"
+              
             />
           </div>
 

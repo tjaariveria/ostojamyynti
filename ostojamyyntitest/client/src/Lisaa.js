@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DataService from "./services/Services";
-import Date from 'react-datetime';
+
 
 const Lisaa = () => {
   const initialIlmoitusState = {
@@ -11,7 +11,7 @@ const Lisaa = () => {
     ilmoittaja_id: "",
   };
 
-  let date = new Date();
+  let date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
   const [ilmoitus, setIlmoitus] = useState(initialIlmoitusState);
   const [submitted, setSubmitted] = useState(false);
@@ -27,8 +27,7 @@ const Lisaa = () => {
       ilmoitus_nimi: ilmoitus.ilmoitus_nimi,
       ilmoitus_kuvaus: ilmoitus.ilmoitus_kuvaus,
       ilmoitus_paivays: date,
-      ilmoittaja_id: ilmoitus.ilmoittaja_id
-      
+      ilmoittaja_id: ilmoitus.ilmoittaja_id      
     };
 
     DataService.createIlmoitus(data)

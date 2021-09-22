@@ -8,29 +8,30 @@ h1 {
   text-align: center;
 }
 
-h1 .{
-  color: #E85A4F;
-  letter-spacing: 0.1em;
-}
-
 h1, h2, p, ul, li {
   font-family: sans-serif;
+}
+
+.mainTitle h1 {
+  color: #E85A4F;
 }
 
 ul.header li {
   display: inline;
   list-style-type: none;
   margin: 0;
+  
 }
 
-
 ul.header {
+  border-radius: 5px;
   background-color: #bba688;
   padding: 0;
 }
 
 
 ul.header li a {
+  border-radius: 5px;
   color: #5f5e5c;
   font-weight: bold;
   text-decoration: none;
@@ -38,11 +39,10 @@ ul.header li a {
   display: inline-block;
 }
 
+
 ul.header li a:hover {
   color: #E85A4F;
 }
-
-
 
 .content {
   background-color: #EAE7DC;

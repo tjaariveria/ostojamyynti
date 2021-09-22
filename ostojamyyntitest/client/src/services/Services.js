@@ -17,7 +17,6 @@ class DataService {
   }
 
   createIlmoitus(data) {
-    console.log("data servicesta: " + data);
     return http.post("/ilmoitukset", data);
   }
 

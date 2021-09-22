@@ -51,69 +51,66 @@ const Lisaa = () => {
   };
 
   return (
-    <div className="submit-form">
+    <div className="form">
       {submitted ? (
         <div>
           <h4>Ilmoitus lisätty onnistuneesti!</h4>
           <button className="btn btn-success" onClick={newIlmoitus}>
-            Add
+            Lisää uusi ilmoitus
           </button>
         </div>
       ) : (
         <div>
           <div className="form-group">
-            <label htmlFor="ilmoitus_laji">Ilmoitus laji</label>
+            <label htmlFor="ilmoitus_laji">Ilmoitus laji: </label>
             <select
               name="ilmoitus_laji"
               className="form-control"
               onChange={handleInputChange}
             >
-              <option selected value={"1"}>
-                Myynti
-              </option>
+              <option defaultValue={"1"}>Myynti</option>
               <option value={"2"}>Osto</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="ilmoitus_nimi">Ilmoitus nimi</label>
+            <label htmlFor="ilmoitus_nimi">Ilmoitus nimi: </label>
             <input
-            name="ilmoitus_nimi"
+              name="ilmoitus_nimi"
               type="text"
               className="form-control"
               required
               value={ilmoitus.ilmoitus_nimi}
-              onChange={handleInputChange}              
+              onChange={handleInputChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="ilmoitus_kuvaus">Ilmoitus kuvaus</label>
+            <label htmlFor="ilmoitus_kuvaus">Ilmoitus kuvaus: </label>
             <input
-            name="ilmoitus_kuvaus"
+              name="ilmoitus_kuvaus"
               type="text"
               className="form-control"
               required
               value={ilmoitus.ilmoitus_kuvaus}
-              onChange={handleInputChange}              
+              onChange={handleInputChange}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="ilmoittaja_id">Ilmoittaja id</label>
+            <label htmlFor="ilmoittaja_id">Ilmoittaja id: </label>
             <input
-            name="ilmoittaja_id"
+              name="ilmoittaja_id"
               type="text"
               className="form-control"
               required
               value={ilmoitus.ilmoittaja_id}
               onChange={handleInputChange}
-              
             />
           </div>
 
           <button onClick={saveIlmoitus} className="btn btn-success">
-            Submit
+            Lisää ilmoitus
           </button>
         </div>
       )}

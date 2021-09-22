@@ -63,40 +63,9 @@ ul.header li a:hover {
   background-color: #D8C3A5;
 }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  background-color: lightgray;
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-}
 
-.description {
-  color: dimgray;
-  font-size: 22px;
-}
 
-.card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
 
-.card button:hover {
-  opacity: 0.7;
-}
-
-.price {
-  color: grey;
-  font-size: 22px;
-}
 
 a.button1 {
   display: inline-block;
@@ -118,12 +87,28 @@ a.button1:hover {
   background-color: #FFFFFF;
 }
 
-.weatherForm {
-  text-align: center;
-}
 
 .logout {
   text-align: right;
+}
+
+button {
+  background-color: #D8C3A5;
+  color: #5f5e5c;
+  border-radius: 5px;
+  border: none;
+  outline: 0;
+  padding: 12px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+button:hover {
+  color: #E85A4F;
+  opacity: 0.7;
 }
 
 .loginForm {
@@ -143,21 +128,9 @@ a.button1:hover {
   color: #FFF;
 }
 
-button {
-  background-color: #4a7c59;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: auto;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-input[type=text], input[type=password], input[type=email] {
+input[type=text], input[type=password], input[type=email], select {
+  background-color: #EAE7DC;
+  border-radius: 5px;
   width: auto;
   padding: 12px 20px;
   margin: 8px 0;
@@ -172,8 +145,12 @@ input[type=text], input[type=password], input[type=email] {
   margin: auto;
 }
 
-.submit-form {
-  max-width: 300px;
+.form {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  background-color: #bba688;
+  border-radius: 5px;
+  padding: 15px;
+  max-width: 40%;
   margin: auto;
 }
 

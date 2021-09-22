@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import DataService from "./services/Services";
+import Date from 'react-datetime';
 
 const Lisaa = () => {
   const initialIlmoitusState = {
@@ -9,6 +10,9 @@ const Lisaa = () => {
     ilmoitus_paivays: "",
     ilmoittaja_id: "",
   };
+
+  let date = new Date();
+
   const [ilmoitus, setIlmoitus] = useState(initialIlmoitusState);
   const [submitted, setSubmitted] = useState(false);
 
@@ -22,11 +26,10 @@ const Lisaa = () => {
       ilmoitus_laji: ilmoitus.ilmoitus_laji,
       ilmoitus_nimi: ilmoitus.ilmoitus_nimi,
       ilmoitus_kuvaus: ilmoitus.ilmoitus_kuvaus,
-      ilmoitus_paivays: ilmoitus.ilmoitus_paivays,
+      ilmoitus_paivays: date,
       ilmoittaja_id: ilmoitus.ilmoittaja_id
       
     };
-    console.log("data saveIlm: " + ilmoitus.ilmoitus_nimi);
 
     DataService.createIlmoitus(data)
       .then((response) => {
@@ -34,11 +37,10 @@ const Lisaa = () => {
           ilmoitus_laji: response.data.ilmoitus_laji,
           ilmoitus_nimi: response.data.ilmoitus_nimi,
           ilmoitus_kuvaus: response.data.ilmoitus_kuvaus,
-          ilmoitus_paivays: response.data.ilmoitus_paivays,
+          ilmoitus_paivays: date,
           ilmoittaja_id: response.data.ilmoittaja_id,
         });
         setSubmitted(true);
-        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -54,7 +56,7 @@ const Lisaa = () => {
     <div className="submit-form">
       {submitted ? (
         <div>
-          <h4>You submitted successfully!</h4>
+          <h4>Ilmoitus lisätty onnistuneesti!</h4>
           <button className="btn btn-success" onClick={newIlmoitus}>
             Add
           </button>
@@ -103,7 +105,7 @@ const Lisaa = () => {
             />
           </div>
           
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="ilmoitus_paivays">Ilmoitus paivays</label>
             <input
               type="date"
@@ -114,7 +116,7 @@ const Lisaa = () => {
               onChange={handleInputChange}
               name="ilmoitus_paivays"
             />
-          </div>
+          </div> */}
 
           <div className="form-group">
             <label htmlFor="ilmoittaja_id">Ilmoittaja id</label>

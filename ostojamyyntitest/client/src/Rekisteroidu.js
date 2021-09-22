@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DataService from "./services/Services";
 
 
@@ -25,8 +25,7 @@ const Rekisteroidu = () => {
     .then((res) => {      
       res.data.map(e => {
       if(e.kayttaja_tunnus === event.target.value) {
-        setCanSubmit(false);
-        
+        setCanSubmit(false);        
       } else {
         setCanSubmit(true);
       }
@@ -71,7 +70,7 @@ const Rekisteroidu = () => {
     <div className="submit-form">
       {submitted ? (
         <div>
-          <h4>You submitted successfully!</h4>
+          <h4>Uusi käyttäjä luotu onnistuneesti!</h4>
           <button className="btn btn-success" onClick={newKayttaja}>
             Add
           </button>

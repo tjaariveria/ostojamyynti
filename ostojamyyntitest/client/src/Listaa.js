@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataService from "./services/Services";
-import axios from "axios";
+// import axios from "axios";
 
 const Listaa = () => {
   const [kayttajat, setKayttajat] = useState([]);

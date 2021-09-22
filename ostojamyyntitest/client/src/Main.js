@@ -15,10 +15,10 @@ const Main = () => {
  
   return (
         <BrowserRouter>
-          <h1>Perus Single Page Application (SPA)</h1>
+          <h1 className="main">Osto ja myyntikanava</h1>
           <ul className="header">
             <li><NavLink exact to="/">Koti</NavLink></li>
-            <li><NavLink to="/rekisteroidu">Rekisteroidu palveluun</NavLink></li>
+            <li><NavLink to="/rekisteroidu">Rekisteröidy palveluun</NavLink></li>
             <li><NavLink to="/listaa">Listaa ilmoitukset</NavLink></li>
             <li><NavLink to="/lisaa">Lisää ilmoitus</NavLink></li>          
           </ul>

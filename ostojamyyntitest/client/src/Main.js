@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, NavLink, BrowserRouter } from "react-router-dom";
 import Koti from "./Koti";
 import Listaa from "./Listaa";
@@ -9,7 +9,34 @@ import Kirjautuminen from "./Kirjautuminen";
 // import LoginForm from './components/LoginForm';
 
 const Main = () => {
+
+  const adminUser = {
+    tunnus: "pepe",
+    password: "koira123"
+  }
+
+  const [user, setUser] = useState({ tunnus: "" });
+
+  const Login = details => {
+    console.log(details.kayttaja_tunnus)
+    if (details.kayttaja_tunnus === adminUser.tunnus && details.kayttaja_salasana === adminUser.password) {
+      console.log("logged in");
+      setUser({
+        tunnus: details.kayttaja_tunnus,
+      });
+    } else {
+      console.log("Details no match");
+    }
+  }
+
+  const Logout = () => {
+    setUser({ tunnus: "" })
+  }
+
   return (
+    <div>
+      {(user.tunnus !== "") ? (
+    
     <BrowserRouter>
       <div className="mainTitle">
         <h1>Osto ja myyntikanava</h1>
@@ -28,9 +55,10 @@ const Main = () => {
         <li>
           <NavLink to="/lisaa">Lisää ilmoitus</NavLink>
         </li>
-        <li className="kirjautuminen">
+        <li className="kirjautuminen">        
         <NavLink to="/kirjautuminen">Kirjaudu sisään</NavLink>
         </li>
+        <div className="loginInfo"><span>Kirjautuneena {user.name} </span><span><button className="logout" onClick={Logout}>Logout</button></span></div>
       </ul>
 
       <div className="content">
@@ -41,6 +69,10 @@ const Main = () => {
         <Route path="/kirjautuminen" component={Kirjautuminen} />
       </div>
     </BrowserRouter>
+      ) :(
+        <Kirjautuminen Login={Login} />
+      )}
+    </div>
   );
 };
 

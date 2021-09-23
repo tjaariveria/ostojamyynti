@@ -81,7 +81,7 @@ const Rekisteroidu = () => {
               onChange={handleInputChange}
               name="kayttaja_tunnus"
             />
-            <span>{!canSubmit ? "username already in use!" : ""}</span>
+            <span>{!canSubmit ? "Käyttäjätunnus on jo käytössä!" : ""}</span>
           </div>
 
           <div className="form-group">

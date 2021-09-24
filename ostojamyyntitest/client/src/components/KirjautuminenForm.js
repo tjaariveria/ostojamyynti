@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import DataService from "./services/Services";
+// import DataService from "./services/Services";
 
 const Kirjautuminen = ({Login}) => {
   const initialKayttajaState = {
@@ -9,16 +9,13 @@ const Kirjautuminen = ({Login}) => {
   };
 
   const [kayttaja, setKayttaja] = useState(initialKayttajaState);
-  const [canLogin, setCanLogin] = useState(false);
 
   const handleInputChange = (event) => {
     event.preventDefault();
+    const { name, value } = event.target;
+    setKayttaja({ ...kayttaja, [name]: value });
     Login(kayttaja);
   };
-
-  const kirjauduSisaan = () => {
-
-  }
 
   return (
     <div className="form">
@@ -33,7 +30,6 @@ const Kirjautuminen = ({Login}) => {
           onChange={handleInputChange}
           name="kayttaja_tunnus"
         />
-        {/* <span>{!canSubmit ? "username already in use!" : ""}</span> */}
       </div>
 
       <div className="form-group">

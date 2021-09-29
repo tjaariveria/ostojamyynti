@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import DataService from "./services/Services";
+// import DataService from "./services/Services";
 
-const Kirjautuminen = () => {
+const Kirjautuminen = ({Login}) => {
   const initialKayttajaState = {
     kayttaja_tunnus: "",
     kayttaja_salasana: "",
@@ -9,27 +9,13 @@ const Kirjautuminen = () => {
   };
 
   const [kayttaja, setKayttaja] = useState(initialKayttajaState);
-  const [canLogin, setCanLogin] = useState(false);
 
   const handleInputChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     setKayttaja({ ...kayttaja, [name]: value });
-    DataService.getKayttajat().then((res) => {
-      res.data.map((e) => {
-        if (e.kayttaja_tunnus === event.target.value) {
-          setCanLogin(true);
-        } else {
-          setCanLogin(false);
-        }
-        return "";
-      });
-    });
+    Login(kayttaja);
   };
-
-  const kirjauduSisaan = () => {
-
-  }
 
   return (
     <div className="form">
@@ -44,7 +30,6 @@ const Kirjautuminen = () => {
           onChange={handleInputChange}
           name="kayttaja_tunnus"
         />
-        {/* <span>{!canSubmit ? "username already in use!" : ""}</span> */}
       </div>
 
       <div className="form-group">
@@ -60,7 +45,7 @@ const Kirjautuminen = () => {
         />
       </div>
       <button
-            onClick={kirjauduSisaan}
+            onClick={handleInputChange}
             className="card"
           >
             Kirjaudu sisään

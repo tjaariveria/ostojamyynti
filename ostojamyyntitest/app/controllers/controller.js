@@ -20,7 +20,7 @@ exports.create = (req, res) => {
       kayttaja_sahkoposti: req.body.kayttaja_sahkoposti
     };
   
-    // Save Tutorial in the database
+    // Save Kayttaja in the database
     Kayttaja.create(kayttaja)
       .then(data => {
         res.send(data);

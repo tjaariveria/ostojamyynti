@@ -1,10 +1,10 @@
 import React from "react";
 import KirjautuminenForm from "./components/KirjautuminenForm"
  
-const Kirjaudu = ({Login}) => {
+const Kirjaudu = () => {
     return (
 
-        <KirjautuminenForm Login={Login} />
+        <KirjautuminenForm  />
 
     );  
 }

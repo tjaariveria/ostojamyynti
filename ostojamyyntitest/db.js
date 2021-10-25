@@ -3,7 +3,7 @@ const mariadb = require('mariadb');
  
 // Create a connection pool
 const pool = mariadb.createPool({
-    host: "ec2-13-53-47-182.eu-north-1.compute.amazonaws.com", 
+    host: "ec2-13-51-70-49.eu-north-1.compute.amazonaws.com", 
     user: "root", 
     password: "my-new-password",
     database: "ostojamyynti"

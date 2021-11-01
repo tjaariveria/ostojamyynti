@@ -54,3 +54,16 @@ body {
     text-align: center;
     border-radius: 5px;
 }
+
+.card {
+    text-align: center;
+    width: 30%;
+}
+
+.card-avatar {
+    background-color: #E85A4F;
+}
+.avatar {
+    width: 50%;
+    border-bottom: 1px solid black;
+}

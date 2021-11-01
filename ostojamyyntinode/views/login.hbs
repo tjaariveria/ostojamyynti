@@ -18,18 +18,8 @@
 
     <div>
       <div class="registerForm">
-        <h1>Rekisteröidy</h1>
-        <form>
-          <div>
-            <label for="userName">Käyttäjätunnus: </label>
-            <input
-              type="text"
-              class="form-control"
-              id="userName"
-              name="name"
-              placeholder="Käyttäjätunnus"
-            />
-          </div>
+        <h1>Kirjaudu palveluun</h1>
+        <form action="/auth/login" method="POST">
 
           <div>
             <label for="email">Sähköposti: </label>
@@ -53,9 +43,15 @@
             />
           </div>
 
-          <button type="submit" class="button">Rekisteröidy</button>
+          <button type="submit" class="button">Kirjaudu</button>
         </form>
       </div>
+    </div>
+
+    <div>
+        {{#if message}}
+        <h4 class="alert">{{message}}</h4>
+        {{/if}}
     </div>
 
   </body>

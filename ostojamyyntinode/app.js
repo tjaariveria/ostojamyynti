@@ -29,7 +29,7 @@ app.set('view engine', 'hbs');
 
 db.connect( (error) => {
     if(error) {
-        console.log(error);
+        console.log("Connection error: " + error);
     } else {
         console.log("Connected to database");
     }
@@ -37,6 +37,10 @@ db.connect( (error) => {
 
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
+
+
+
+   
 
 app.listen(3030, () => {
     console.log("Server started on port 3030")

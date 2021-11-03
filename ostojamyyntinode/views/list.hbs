@@ -25,9 +25,21 @@
     <div>
         <div class="ad">
             
-            <h2>Ilmoituksen otsikko</h2>
+            <h2>Listaus</h2>
             <p>Ilmoituksen kuvaus</p>
-            {{list}}
+            {{#list}}
+            <div>
+                <tr>
+                    <td>
+                        {{ilmoitus_nimi}}
+                    </td>
+                    <td>
+                        {{ilmoitus_kuvaus}}
+                    </td>
+                </tr>
+                </div>
+                <br>
+            {{/list}}            
         </div>
     </div>
     

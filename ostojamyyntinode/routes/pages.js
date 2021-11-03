@@ -17,6 +17,13 @@ router.get("/login", (req, res) => {
     res.render("login");
 });
 
+router.get('/list', authController.listItems, (req, res) => {
+    res.render('list', {
+        list: req.list
+    });
+    console.log(req.list);
+});
+
 router.get('/profile', authController.isLoggedIn,  (req, res) => {
     if(req.user) {
         res.render('profile', {

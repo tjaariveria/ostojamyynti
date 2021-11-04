@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
 
+
+
 const db = mysql.createConnection({
   host: process.env.HOST,
   user: process.env.USER,
@@ -123,8 +125,32 @@ exports.logout = async (req, res) => {
 };
 
 //Middlewares
-
 exports.listItems = async (req, res, next) => {
+  try {
+    
+    db.query("SELECT * FROM ilmoitukset", async (error, results) => {
+      req.list = results;
+      next();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.listUsers = async (req, res, next) => {
+  try {
+    
+    db.query("SELECT * FROM kayttajat", async (error, results) => {
+      req.users = results;
+      next();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+exports.listUserItems = async (req, res, next) => {
   try {
     const decoded = await promisify(jwt.verify)(
       req.cookies.jwt,

@@ -1,11 +1,23 @@
 const express = require("express");
 const authController = require("../controllers/auth");
 
+var hbs = require('hbs');
+hbs.registerHelper('toInt', function(str) {
+  return parseInt(str,10);
+});
+
+
+
 const router = express.Router();
 
-router.get("/", authController.isLoggedIn, (req, res) => {
+router.get("/", [authController.isLoggedIn, authController.listItems, authController.listUsers], (req, res) => {
+    const list = req.list;
+      const user = req.user;
+      const users = req.users;
   res.render("index", {
-    user: req.user,
+    user,
+    list,
+    users
   });
 });
 
@@ -26,7 +38,7 @@ router.get("/list", authController.listItems, (req, res) => {
 
 router.get(
   "/profile",
-  [authController.isLoggedIn, authController.listItems],
+  [authController.isLoggedIn, authController.listUserItems],
   (req, res) => {
       const list = req.list;
       const user = req.user

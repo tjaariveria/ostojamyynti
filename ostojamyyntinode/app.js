@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 
 dotenv.config({path: './.env'});
 
+
+
 const app = express();
 
 const db = mysql.createConnection({

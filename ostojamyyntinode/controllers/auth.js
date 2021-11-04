@@ -152,7 +152,6 @@ exports.isLoggedIn = async (req, res, next) => {
         "SELECT * FROM kayttajat WHERE kayttaja_id = ?",
         [decoded.id],
         (error, results) => {
-          console.log("Is logged in results: " + results);
           if (!results) {
             return next();
           }

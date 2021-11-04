@@ -122,9 +122,15 @@ exports.logout = async (req, res) => {
   res.status(200).redirect("/");
 };
 
+//Middlewares
+
 exports.listItems = async (req, res, next) => {
   try {
-    db.query("SELECT * FROM ilmoitukset", async (error, results) => {
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+    db.query("SELECT * FROM ilmoitukset WHERE ilmoittaja_id = ?", [decoded.id], async (error, results) => {
       req.list = results;
       next();
     });
@@ -133,7 +139,7 @@ exports.listItems = async (req, res, next) => {
   }
 };
 
-//Middlewares
+
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {

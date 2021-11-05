@@ -6,7 +6,31 @@ hbs.registerHelper('toInt', function(str) {
   return parseInt(str,10);
 });
 
+hbs.registerHelper('findUser', function(list, users) {
+  let found = list.find(e => e == 2);
+  console.log(found);
+  return found;
+  // let userName = "";
+  // let kierroksia = 0;
+  // list.forEach(e => {
+  //   if(e.kayttaja_id != -1) {
+  //     users.forEach(user => {
+  //       if(user.kayttaja_id != -1) {
+  //         console.log(e.ilmoittaja_id + " : " + user.kayttaja_id);
+        
+  //       if (e.ilmoittaja_id === user.kayttaja_id) {
+  //         console.log("samat");
+  //         kierroksia++;
+  //         return user;
 
+  //       }
+  //       }
+        
+  //     }); 
+  //   }
+  //      console.log("Kierroksia " + kierroksia);
+  // });  
+});
 
 const router = express.Router();
 

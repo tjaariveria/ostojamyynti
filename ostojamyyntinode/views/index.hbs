@@ -23,12 +23,10 @@
     </div>
     <div>
     </div>
-{{#users}}
-                <h1>{{this}}</h1>
 
-                {{/users}}
     <div>
         {{#list}}
+        
              <div class="ilmoitukset">      
           <div class="ilmoitus" key={{ilmoitus_id}}>
             <div>
@@ -36,9 +34,14 @@
               <h3>{{ilmoitus_kuvaus}}</h3>
             </div>
             <div>
-                
-                <h5>Ilmoittaja: {{../users.[{{toInt ilmoittaja_id}}].kayttaja_tunnus}}</h5>
-                <h3>Indeksi: {{toInt ilmoittaja_id}}</h3>
+                <!--
+                {{#each ../users}}
+                <h1>{{kayttaja_salasana}}</h1>
+
+                {{/each}}
+                -->
+                <h5>Ilmoittaja: {{findUser ../list ../users}}</h5>
+                <h3>Indeksi: {{@index}}</h3>
                 
             </div>
             <div>

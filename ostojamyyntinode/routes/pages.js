@@ -2,35 +2,32 @@ const express = require("express");
 const authController = require("../controllers/auth");
 
 var hbs = require('hbs');
-hbs.registerHelper('toInt', function(str) {
-  return parseInt(str,10);
+
+hbs.registerHelper('findUser', function(users, kayttaja) {
+  let user = "";
+  users.forEach(u => {
+    if (u.kayttaja_id === kayttaja) {
+      user = u.kayttaja_tunnus;      
+    }
+  })
+  return user; 
 });
 
-hbs.registerHelper('findUser', function(list, users) {
-  let found = list.find(e => e == 2);
-  console.log(found);
-  return found;
-  // let userName = "";
-  // let kierroksia = 0;
-  // list.forEach(e => {
-  //   if(e.kayttaja_id != -1) {
-  //     users.forEach(user => {
-  //       if(user.kayttaja_id != -1) {
-  //         console.log(e.ilmoittaja_id + " : " + user.kayttaja_id);
-        
-  //       if (e.ilmoittaja_id === user.kayttaja_id) {
-  //         console.log("samat");
-  //         kierroksia++;
-  //         return user;
 
-  //       }
-  //       }
-        
-  //     }); 
-  //   }
-  //      console.log("Kierroksia " + kierroksia);
-  // });  
-});
+
+hbs.registerHelper('editAdvert', function(editAdvertBoolean) {
+  
+    if (editAdvertBoolean === null) {
+      console.log("if")
+      editAdvertBoolean = "tru";
+      
+    }  
+      return editAdvertBoolean;    
+})
+
+var editButtonClick = function(editAdvertBoolean) {
+  editAdvertBoolean = true;
+}
 
 const router = express.Router();
 
@@ -45,6 +42,13 @@ router.get("/", [authController.isLoggedIn, authController.listItems, authContro
   });
 });
 
+// router.get('/editAdvert', authController.editAdvert, (req, res) => {
+//   const advert = req.advert;
+//   res.render('editAdvert', {
+//     advert
+//   });
+// })
+
 router.get("/register", (req, res) => {
   res.render("register");
 });
@@ -57,7 +61,6 @@ router.get("/list", authController.listItems, (req, res) => {
   res.render("list", {
     list: req.list,
   });
-  console.log(req.list);
 });
 
 router.get(
@@ -65,12 +68,15 @@ router.get(
   [authController.isLoggedIn, authController.listUserItems],
   (req, res) => {
       const list = req.list;
-      const user = req.user
+      const user = req.user;
+      const editAdvertBoolean = null;
     if (req.list) {
       res.render("profile", {
         list,
-        user
+        user,
+        editAdvertBoolean
       });
+      console.log(editAdvertBoolean);
     // } else if (req.user) {
     //   console.log("pages user");
     //   res.render("profile", {

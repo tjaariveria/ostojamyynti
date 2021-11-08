@@ -2,8 +2,7 @@ const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { promisify } = require("util");
-
-
+const exp = require("constants");
 
 const db = mysql.createConnection({
   host: process.env.HOST,
@@ -115,19 +114,27 @@ exports.register = (req, res) => {
   );
 };
 
+// exports.editAdvert = async (req, res) => {
+//   try {
+//     db.query("SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?", [ilmoitus_id],  async (error, results) => {
+//       req.list = results;
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
 exports.logout = async (req, res) => {
   res.cookie("jwt", "logout", {
     expires: new Date(Date.now() + 2 * 1000),
     httpOnly: true,
   });
-
   res.status(200).redirect("/");
 };
 
 //Middlewares
 exports.listItems = async (req, res, next) => {
   try {
-    
     db.query("SELECT * FROM ilmoitukset", async (error, results) => {
       req.list = results;
       next();
@@ -139,7 +146,6 @@ exports.listItems = async (req, res, next) => {
 
 exports.listUsers = async (req, res, next) => {
   try {
-    
     db.query("SELECT * FROM kayttajat", async (error, results) => {
       req.users = results;
       next();
@@ -149,22 +155,24 @@ exports.listUsers = async (req, res, next) => {
   }
 };
 
-
 exports.listUserItems = async (req, res, next) => {
   try {
     const decoded = await promisify(jwt.verify)(
       req.cookies.jwt,
       process.env.JWT_SECRET
     );
-    db.query("SELECT * FROM ilmoitukset WHERE ilmoittaja_id = ?", [decoded.id], async (error, results) => {
-      req.list = results;
-      next();
-    });
+    db.query(
+      "SELECT * FROM ilmoitukset WHERE ilmoittaja_id = ?",
+      [decoded.id],
+      async (error, results) => {
+        req.list = results;
+        next();
+      }
+    );
   } catch (error) {
     console.log(error);
   }
 };
-
 
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {

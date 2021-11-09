@@ -8,48 +8,24 @@
     <title>Osto ja myyntikanava</title>
 </head>
 <body>
-    <div class="nav">
-        <h3>Osto ja myyntikanava</h3>
-        <ul>
-            <li><a href="/">Etusivu</a></li>
-            {{#if user}}
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/auth/logout">Logout</a></li>
-            {{else}}
-                <li><a href="/login">Kirjaudu</a></li>
-                <li><a href="/register">Rekisteröidy</a></li>
-            {{/if}}
-        </ul>
-    </div>
+    
     <div>
     </div>
 
     <div>
-        {{#list}}
-        
-             <div class="ilmoitukset">      
-          <div class="ilmoitus" key={{ilmoitus_id}}>
-            <div>
-              <h1>{{ilmoitus_nimi}}</h1>
-              <h3>{{ilmoitus_kuvaus}}</h3>
+        {{#list}}        
+            <div class="ilmoitukset">
+                <div class="ilmoitus" key={{ilmoitus_id}}>
+                    <div>
+                        <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
+                        <h3>{{ilmoitus_kuvaus}}</h3>
+                    </div>
+                    <div>
+                        <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}}</h5>                
+                    </div>
+                </div>     
             </div>
-            <div>
-                <!--
-                {{#each ../users}}
-                <h1>{{kayttaja_salasana}}</h1>
-
-                {{/each}}
-                -->
-                <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}}</h5>
-                
-            </div>
-            <div>
-                
-            </div>
-          </div>     
-    </div>
-
-            {{/list}}
+        {{/list}}
     </div>
     
 </body>

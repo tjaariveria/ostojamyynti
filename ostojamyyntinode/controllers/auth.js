@@ -61,7 +61,6 @@ exports.login = async (req, res) => {
 };
 
 exports.register = (req, res) => {
-  console.log(req.body);
   // const name = req.body.name;
   // const email = req.body.email;
   // const password = req.body.password;
@@ -114,15 +113,19 @@ exports.register = (req, res) => {
   );
 };
 
-// exports.editAdvert = async (req, res) => {
-//   try {
-//     db.query("SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?", [ilmoitus_id],  async (error, results) => {
-//       req.list = results;
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+// Edit advert
+exports.editAdvert = async (req, res) => {
+  try {
+    db.query("SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?", [req.params.id], async (error, results) => {
+      
+      req.advert = results;
+     
+    });
+  } catch (error) {
+    console.log(error);
+  }
+  
+};
 
 exports.logout = async (req, res) => {
   res.cookie("jwt", "logout", {

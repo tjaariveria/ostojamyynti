@@ -1,84 +1,76 @@
 <html lang="fi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/styles/styles.css" />
-    <title>Osto ja myyntikanava</title>
-  </head>
-  <body>
-    <div class="nav">
-      <h3>Osto ja myyntikanava</h3>
-      <ul>
-        <li><a href="/">Etusivu</a></li>
-        <li><a href="/profile">Profile</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
-      </ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/styles/styles.css" />
+  <title>Osto ja myyntikanava</title>
+</head>
+
+<body>
+
+
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-avatar">
+          <img src="/assets/img/avatars/avatar.png" class="avatar" alt="user avatar">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{user.kayttaja_tunnus}}</h5>
+          <p class="card-text">Two giants live in Britain's land,
+            John Doe and Richard Roe,
+            Who always travel hand in hand,
+            John Doe and Richard Roe.
+            Their fee-faw-fum's an ancient plan
+            To smell the purse of an Englishman,
+            And, 'ecod, they'll suck it all they can,
+            John Doe and Richard Roe </p>
+          <a href="#" class="button-email">{{user.kayttaja_sahkoposti}}</a>
+        </div>
+      </div>
+
+
     </div>
+    <div class="col-8">
+      <div class="card-profile-text">
+        <div class="card-profile-title">
+          <h2>Jee</h2>
+        </div>
+        <div>
 
-    <div class="row">
-     <div class="col-4">
-         <div class="card">
-             <div class="card-avatar">
-                 <img src="/assets/img/avatars/avatar.png" class="avatar" alt="user avatar">
-             </div>
-             <div class="card-body">
-                 <h5 class="card-title">{{user.kayttaja_tunnus}}</h5>
-                 <p class="card-text">Two giants live in Britain's land,
-John Doe and Richard Roe,
-Who always travel hand in hand,
-John Doe and Richard Roe.
-Their fee-faw-fum's an ancient plan
-To smell the purse of an Englishman,
-And, 'ecod, they'll suck it all they can,
-John Doe and Richard Roe </p>
-<a href="#" class="button-email">{{user.kayttaja_sahkoposti}}</a>
-             </div>
-         </div>
+          {{#list}}
+          <div class="ilmoitukset">
+            <div class="ilmoitus" key={{ilmoitus_id}}>
+              <div>
+                <h1>{{ilmoitus_nimi}}</h1>
+                <h3>{{ilmoitus_kuvaus}}</h3>
+                
+                <a href="/editAdvert/{{ilmoitus_id}}" type="button">Muokkaa</a>
+                
+              </div>
 
-
-     </div>
-     <div class="col-8">
-         <div class="card-profile-text">
-             <div class="card-profile-title"><h2>Jee</h2></div>
-             <div>
-               
-             {{#list}}
-             <div class="ilmoitukset">      
-          <div class="ilmoitus" key={{ilmoitus_id}}>
-            {{#if editAdvertBoolean}}
-            <div>
-              <p>Nyt on klikattu</p>
-            </div>
-
-
-            {{else}}
-            <div>
-              <h1>{{ilmoitus_nimi}}</h1>
-              <h3>{{ilmoitus_kuvaus}}</h3>
-              <p>{{../editAdvertBoolean}}</p>
-              <button onclick="editButtonClick({{editAdvert ../editAdvertBoolean}})">Muokkaa ilmoitusta</button>
-            </div>
-            {{/if}}
-            <!--
+              <!--
                 <div key={{../user.kayttaja_id}}>
                   Ilmoittaja:<span class="ilmoittaja">{{../user.kayttaja_tunnus}}</span>
                   
                 </div>
                 -->
-              
-          </div>     
-    </div>
 
-            {{/list}}
-            </div> 
-         </div>
+            </div>
+          </div>
 
-     </div>
+          {{/list}}
+        </div>
+      </div>
 
     </div>
-    
+
+  </div>
 
 
-  </body>
+
+</body>
+
 </html>

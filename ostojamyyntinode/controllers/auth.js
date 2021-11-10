@@ -109,14 +109,9 @@ exports.register = (req, res) => {
   );
 };
 
-
 // Add Advert
-exports.newAdvert = async ( req, res, next ) => {
-  const {
-    ilmoitus_laji,
-    ilmoitus_nimi,
-    ilmoitus_kuvaus,
-  } = req.body;
+exports.newAdvert = async (req, res, next) => {
+  const { ilmoitus_laji, ilmoitus_nimi, ilmoitus_kuvaus } = req.body;
 
   const decoded = await promisify(jwt.verify)(
     req.cookies.jwt,
@@ -130,18 +125,17 @@ exports.newAdvert = async ( req, res, next ) => {
       ilmoitus_nimi,
       ilmoitus_kuvaus,
       ilmoitus_paivays: new Date(Date.now()),
-      ilmoittaja_id: decoded.id
+      ilmoittaja_id: decoded.id,
     },
     (error, results) => {
       if (error) {
         console.log("Error in query: " + error);
       } else {
-        res.redirect('/profile');
+        res.redirect("/profile");
       }
     }
   );
-
-}
+};
 
 // Edit Advert
 exports.editAdvert = async (req, res, next) => {
@@ -190,7 +184,7 @@ exports.deleteAdvert = async (req, res, next) => {
       "DELETE FROM ilmoitukset WHERE ilmoitus_id = ?",
       [req.params.id],
       async (error, results) => {
-        res.redirect('/profile');
+        res.redirect("/profile");
         next();
       }
     );
@@ -252,7 +246,7 @@ exports.listUserItems = async (req, res, next) => {
 };
 
 exports.isLoggedIn = async (req, res, next) => {
-  if (req.cookies.jwt) {    
+  if (req.cookies.jwt) {
     try {
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,

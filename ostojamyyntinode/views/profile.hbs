@@ -15,6 +15,7 @@
     <div class="col-8">
       <div class="card-profile-text">
         <div class="card-profile-title">
+          <h4>Kirjautuneena: {{user.kayttaja_tunnus}}</h4>
           <h2 style="text-align: center;">Omat ilmoitukset</h2>
         </div>
         <div>
@@ -24,8 +25,8 @@
               <div>
                 <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
                 <h3>{{ilmoitus_kuvaus}}</h3>
-                <a href="/editAdvert/{{ilmoitus_id}}" type="button">Muokkaa</a>
-                <a href="/delete/{{ilmoitus_id}}" type="button">Poista</a>
+                <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+                <a href="/delete/{{ilmoitus_id}}"><button class="button">Poista</button></a>
               </div>
             </div>
           </div>

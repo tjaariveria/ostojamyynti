@@ -24,7 +24,6 @@ exports.login = async (req, res) => {
       "SELECT * FROM kayttajat WHERE kayttaja_sahkoposti = ?",
       [kayttaja_sahkoposti],
       async (error, results) => {
-        console.log(results);
         if (
           !results ||
           !(await bcrypt.compare(
@@ -110,7 +109,41 @@ exports.register = (req, res) => {
   );
 };
 
-// Edit advert
+
+// Add Advert
+exports.newAdvert = async ( req, res, next ) => {
+  const {
+    ilmoitus_laji,
+    ilmoitus_nimi,
+    ilmoitus_kuvaus,
+  } = req.body;
+
+  const decoded = await promisify(jwt.verify)(
+    req.cookies.jwt,
+    process.env.JWT_SECRET
+  );
+
+  db.query(
+    "INSERT INTO ilmoitukset SET ?",
+    {
+      ilmoitus_laji,
+      ilmoitus_nimi,
+      ilmoitus_kuvaus,
+      ilmoitus_paivays: new Date(Date.now()),
+      ilmoittaja_id: decoded.id
+    },
+    (error, results) => {
+      if (error) {
+        console.log("Error in query: " + error);
+      } else {
+        res.redirect('/profile');
+      }
+    }
+  );
+
+}
+
+// Edit Advert
 exports.editAdvert = async (req, res, next) => {
   try {
     db.query(
@@ -126,7 +159,7 @@ exports.editAdvert = async (req, res, next) => {
   }
 };
 
-// Update advert
+// Update Advert
 exports.updateAdvert = async (req, res, next) => {
   const { ilmoitus_kuvaus, ilmoitus_nimi } = req.body;
   try {
@@ -142,6 +175,23 @@ exports.updateAdvert = async (req, res, next) => {
             next();
           }
         );
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+// Delete Advert
+exports.deleteAdvert = async (req, res, next) => {
+  try {
+    db.query(
+      "DELETE FROM ilmoitukset WHERE ilmoitus_id = ?",
+      [req.params.id],
+      async (error, results) => {
+        res.redirect('/profile');
+        next();
       }
     );
   } catch (error) {
@@ -214,7 +264,6 @@ exports.isLoggedIn = async (req, res, next) => {
         [decoded.id],
         (error, results) => {
           if (!results) {
-            console.log("ei tullu tulosta")
             return next();
           }
           req.user = results[0];
@@ -222,7 +271,7 @@ exports.isLoggedIn = async (req, res, next) => {
         }
       );
     } catch (error) {
-      console.log("Error in lofin query: " + error);
+      console.log("Error in login query: " + error);
       return next();
     }
   } else {

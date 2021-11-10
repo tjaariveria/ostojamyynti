@@ -80,17 +80,32 @@ router.get(
   "/profile",
   [authController.isLoggedIn, authController.listUserItems],
   (req, res) => {
-    const list = req.list;
-    const user = req.user;
     if (req.list) {
       res.render("profile", {
-        list,
-        user
+        list: req.list,
+        user: req.user
       });
     } else {
       res.redirect("/login");
     }
   }
 );
+
+router.get('/newAdvert', [authController.isLoggedIn], (req, res) => {
+  // const user = req.user;
+  res.render('new-advert', {
+    user: req.user
+  });
+});
+
+router.post('/newAdvert', [authController.isLoggedIn, authController.newAdvert], (req, res) => {
+  // const user = req.user;
+  res.render('new-advert', {
+    user: req.user
+  });
+});
+
+
+router.get('/delete/:id', authController.deleteAdvert);
 
 module.exports = router;

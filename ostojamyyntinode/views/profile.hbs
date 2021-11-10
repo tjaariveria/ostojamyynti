@@ -12,51 +12,21 @@
 
 
   <div class="row">
-    <div class="col-4">
-      <div class="card">
-        <div class="card-avatar">
-          <img src="/assets/img/avatars/avatar.png" class="avatar" alt="user avatar">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{user.kayttaja_tunnus}}</h5>
-          <p class="card-text">Two giants live in Britain's land,
-            John Doe and Richard Roe,
-            Who always travel hand in hand,
-            John Doe and Richard Roe.
-            Their fee-faw-fum's an ancient plan
-            To smell the purse of an Englishman,
-            And, 'ecod, they'll suck it all they can,
-            John Doe and Richard Roe </p>
-          <a href="#" class="button-email">{{user.kayttaja_sahkoposti}}</a>
-        </div>
-      </div>
-
-
-    </div>
     <div class="col-8">
       <div class="card-profile-text">
         <div class="card-profile-title">
-          <h2>Jee</h2>
+          <h2 style="text-align: center;">Omat ilmoitukset</h2>
         </div>
         <div>
-
           {{#list}}
           <div class="ilmoitukset">
             <div class="ilmoitus" key={{ilmoitus_id}}>
               <div>
                 <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
-                <h3>{{ilmoitus_kuvaus}}</h3>                
+                <h3>{{ilmoitus_kuvaus}}</h3>
                 <a href="/editAdvert/{{ilmoitus_id}}" type="button">Muokkaa</a>
-                <a href="/delete/{{ilmoitus_id}}" type="button">Poista</a>                
+                <a href="/delete/{{ilmoitus_id}}" type="button">Poista</a>
               </div>
-
-              <!--
-                <div key={{../user.kayttaja_id}}>
-                  Ilmoittaja:<span class="ilmoittaja">{{../user.kayttaja_tunnus}}</span>
-                  
-                </div>
-                -->
-
             </div>
           </div>
           {{/list}}
@@ -65,4 +35,5 @@
     </div>
   </div>
 </body>
+
 </html>

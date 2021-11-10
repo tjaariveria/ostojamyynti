@@ -40,9 +40,6 @@ exports.login = async (req, res) => {
           const token = jwt.sign({ id }, process.env.JWT_SECRET, {
             expiresIn: process.env.JWT_EXPIRES_IN,
           });
-
-          console.log("the token is: " + token);
-
           const cookieOptions = {
             expires: new Date(
               Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
@@ -114,19 +111,46 @@ exports.register = (req, res) => {
 };
 
 // Edit advert
-exports.editAdvert = async (req, res) => {
+exports.editAdvert = async (req, res, next) => {
   try {
-    db.query("SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?", [req.params.id], async (error, results) => {
-      
-      req.advert = results;
-     
-    });
+    db.query(
+      "SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?",
+      [req.params.id],
+      async (error, results) => {
+        req.advert = results[0];
+        next();
+      }
+    );
   } catch (error) {
     console.log(error);
   }
-  
 };
 
+// Update advert
+exports.updateAdvert = async (req, res, next) => {
+  const { ilmoitus_kuvaus, ilmoitus_nimi } = req.body;
+  try {
+    db.query(
+      "UPDATE ilmoitukset SET ilmoitus_kuvaus = ?, ilmoitus_nimi = ? WHERE ilmoitus_id = ?",
+      [ilmoitus_kuvaus, ilmoitus_nimi, req.params.id],
+      async (error, results) => {
+        db.query(
+          "SELECT * FROM ilmoitukset WHERE ilmoitus_id = ?",
+          [req.params.id],
+          async (error, results) => {
+            req.advert = results[0];
+            next();
+          }
+        );
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
+
+// Logout
 exports.logout = async (req, res) => {
   res.cookie("jwt", "logout", {
     expires: new Date(Date.now() + 2 * 1000),
@@ -178,7 +202,7 @@ exports.listUserItems = async (req, res, next) => {
 };
 
 exports.isLoggedIn = async (req, res, next) => {
-  if (req.cookies.jwt) {
+  if (req.cookies.jwt) {    
     try {
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
@@ -190,9 +214,9 @@ exports.isLoggedIn = async (req, res, next) => {
         [decoded.id],
         (error, results) => {
           if (!results) {
+            console.log("ei tullu tulosta")
             return next();
           }
-
           req.user = results[0];
           return next();
         }

@@ -9,16 +9,11 @@
 </head>
 
 <body>
-<div><p>{{ilmoitus_kuvaus}}</p></div>
   <div>
-    <form action="/auth/editAdvert" method="PUT">
+    <form action="/editAdvert/{{advert.ilmoitus_id}}" method="POST">
       {{> advert-form}}
     </form>
   </div>
-
-  
-
   </div>
 </body>
-
 </html>

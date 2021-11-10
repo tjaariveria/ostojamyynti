@@ -1,26 +1,44 @@
 <div class="registerForm">
   <h1>Muokkaa ilmoitusta</h1>
 
+
+<div>
+    <label for="ilmoitus_laji">Ilmoituksen tyyppi: </label>
+    <select
+      class="form-control"
+      id="ilmoitus_laji"
+      name="ilmoitus_laji"
+    >
+    
+      <option value="">{{ilmoitusLaji advert.ilmoitus_laji}}</option>
+      {{#if (kumpiIlmoitusLaji advert.ilmoitus_laji)}}      
+      <option value="1">Myydään</option>
+      {{else}}      
+      <option value="2">Ostetaan</option>
+      {{/if}}
+    </select>
+  </div>
+
   <div>
-    <label for="advertName">Ilmoitusksen nimi: </label>
+    <label for="ilmoitus_nimi">Ilmoitusksen nimi: </label>
     <input
       type="text"
       class="form-control"
       id="ilmoitus_nimi"
       name="ilmoitus_nimi"
-      value={{ilmoitus_nimi}}
+      value={{advert.ilmoitus_nimi}}
     />
   </div>
 
   <div>
-    <label for="advertDescription">Ilmoituksen kuvaus:</label>
-    <input
-      type="text"
+    <label for="ilmoitus_kuvaus">Ilmoituksen kuvaus:</label>
+    <textarea
       class="form-control"
+      style="height: 100px"
       id="ilmoitus_kuvaus"
       name="ilmoitus_kuvaus"
-      placeholder={{ilmoitus_kuvaus}}
-    />
+      placeholder="Lisää kuvaus"
+    >{{advert.ilmoitus_kuvaus}}</textarea>
   </div>
 
   <button type="submit" class="button">Tallenna</button>

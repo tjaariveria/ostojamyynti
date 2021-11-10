@@ -8,6 +8,13 @@ module.exports = {
     }
     return ilmoitusLaji;
   },
+  kumpiIlmoitusLaji: (ilmoitus_laji) => {
+    let ilmoitusLajiBoolean = false;
+    if (ilmoitus_laji === 2) {
+      ilmoitusLajiBoolean = true;
+    } 
+    return ilmoitusLajiBoolean;
+  },
   findUser: (users, kayttaja) => {
     let user = "";
     users.forEach((u) => {

@@ -25,17 +25,36 @@ router.get(
 router.get(
   "/editAdvert/:id",
   [
-    authController.editAdvert,
     authController.isLoggedIn,
+    authController.editAdvert    
   ],
   (req, res) => {
     const user = req.user;
     const advert = req.advert
-    console.log(advert)
     if (advert) {
       res.render('edit-advert', {
-        advert,
         user,
+        advert        
+      });
+    } else {
+      res.redirect('/login');
+    }
+  }
+);
+
+router.post(
+  "/editAdvert/:id",
+  [
+    authController.isLoggedIn,
+    authController.updateAdvert    
+  ],
+  (req, res) => {
+    const user = req.user;
+    const advert = req.advert
+    if (advert) {
+      res.render('edit-advert', {
+        user,
+        advert        
       });
     } else {
       res.redirect('/login');
@@ -63,12 +82,10 @@ router.get(
   (req, res) => {
     const list = req.list;
     const user = req.user;
-    const editAdvertBoolean = null;
     if (req.list) {
       res.render("profile", {
         list,
-        user,
-        editAdvertBoolean,
+        user
       });
     } else {
       res.redirect("/login");

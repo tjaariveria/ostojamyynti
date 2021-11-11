@@ -1,0 +1,38 @@
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/styles/styles.css" />
+    <title>Osto ja myyntikanava</title>
+</head>
+
+<body>
+
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card-profile-text">
+                <div class="card-profile-title">
+                    <h4 style="text-align: center;">Hallitse käyttäjiä</h4>
+                </div>
+                <div>
+                    {{#users}}
+                    <div class="ilmoitukset">
+                        <div class="ilmoitus" key={{kayttaja_id}}>
+                            <div>
+                                <h1>Käyttäjätunnus: {{kayttaja_tunnus}}</h1>
+                                <h3>Käyttäjän sähköposti: {{kayttaja_sahkoposti}}</h3>
+                                <a href="/deleteUser/{{ilmoitus_id}}"><button class="button">Poista</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/users}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

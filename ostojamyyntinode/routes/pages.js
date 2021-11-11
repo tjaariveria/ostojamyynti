@@ -14,10 +14,33 @@ router.get(
     const list = req.list;
     const user = req.user;
     const users = req.users;
+    const searchAdvert = req.searchAdvert;
     res.render("index", {
       user,
       list,
       users,
+      searchAdvert
+    });
+  }
+);
+
+router.post(
+  "",
+  [
+    authController.isLoggedIn,
+    authController.listItems,
+    authController.listUsers,
+  ],
+  (req, res) => {
+    const list = req.list;
+    const user = req.user;
+    const users = req.users;
+    const searchAdvert = req.searchAdvert;
+    res.render("index", {
+      user,
+      list,
+      users,
+      searchAdvert
     });
   }
 );
@@ -90,6 +113,24 @@ router.get(
     }
   }
 );
+
+router.get(
+  '/admin',
+  [authController.isLoggedIn, authController.listUsers],
+  (req, res) => {
+    if (req.user) {
+      res.render('admin', {
+        users: req.users,
+        user: req.user
+      });
+    } else {
+      res.redirect("/login");
+    }
+  }
+);
+
+
+
 
 router.get('/newAdvert', [authController.isLoggedIn], (req, res) => {
   // const user = req.user;

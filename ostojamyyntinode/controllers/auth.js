@@ -112,7 +112,6 @@ exports.register = (req, res) => {
 // Add Advert
 exports.newAdvert = async (req, res, next) => {
   const { ilmoitus_laji, ilmoitus_nimi, ilmoitus_kuvaus } = req.body;
-
   const decoded = await promisify(jwt.verify)(
     req.cookies.jwt,
     process.env.JWT_SECRET
@@ -154,7 +153,7 @@ exports.editAdvert = async (req, res, next) => {
 };
 
 // Update Advert
-exports.updateAdvert = async (req, res, next) => {
+exports.updateAdvert = async (req, res, next) => {  
   const { ilmoitus_kuvaus, ilmoitus_nimi } = req.body;
   try {
     db.query(
@@ -204,12 +203,29 @@ exports.logout = async (req, res) => {
 };
 
 //Middlewares
+//List Adverts
 exports.listItems = async (req, res, next) => {
-  try {
+  let { searchAdvert }  = req.body;
+  if(searchAdvert === "") {
+    searchAdvert = undefined;
+  }
+  try { 
+      if(searchAdvert != undefined) {
+      db.query(
+        "SELECT * FROM ilmoitukset WHERE MATCH(ilmoitus_nimi, ilmoitus_kuvaus) AGAINST (? IN NATURAL LANGUAGE MODE)",
+        [searchAdvert],
+        async (error, results) => {
+          req.list = results;
+          req.searchAdvert = searchAdvert;
+          next();
+        }
+      );
+    } else {
     db.query("SELECT * FROM ilmoitukset", async (error, results) => {
       req.list = results;
       next();
     });
+  }
   } catch (error) {
     console.log(error);
   }

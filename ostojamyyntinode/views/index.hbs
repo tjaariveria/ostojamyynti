@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/styles/styles.css">    
+    <link rel="stylesheet" href="/assets/styles/styles.css">
     <title>Osto ja myyntikanava</title>
 </head>
+
 <body>
-    
-    <div>
+
+
+
+    <div style="text-align: center;">
+        <form action="/" method="POST">
+        <label for="searchAdvert">Hae ilmoituksista: </label>
+        <input type="text" class="form-control" id="searchAdvert" name="searchAdvert" placeholder="Kirjoita hakusana" />
+        
+        {{#if (isEmpty searchAdvert)}}
+        <button type="submit" class="button">Hae</button><button type="submit" class="button">Tyhjennä</button>
+        {{else}}
+        <button type="submit" class="button">Hae</button>
+        {{/if}}
+        </form>
     </div>
 
     <div>
-        {{#list}}        
-            <div class="ilmoitukset">
-                <div class="ilmoitus" key={{ilmoitus_id}}>
-                    <div>
-                        <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
-                        <h3>{{ilmoitus_kuvaus}}</h3>
-                    </div>
-                    <div>
-                        <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}}</h5>                
-                    </div>
-                </div>     
-            </div>
-        {{/list}}
+        {{> list-adverts}}
     </div>
-    
+
 </body>
+
 </html>

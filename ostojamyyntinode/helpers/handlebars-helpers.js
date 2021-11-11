@@ -26,9 +26,33 @@ module.exports = {
   },
   editAdvert: (editAdvertBoolean) => {
     if (editAdvertBoolean === null) {
-      console.log("if");
       editAdvertBoolean = "tru";
     }
     return editAdvertBoolean;
   },
+  formatDate: (ilmoitus_paivays) => {
+    let dateFromDb = ilmoitus_paivays;
+    let year = dateFromDb.getFullYear();
+    let month = ('0' + (dateFromDb.getMonth() + 1)).slice(-2);
+    let date = ('0' + dateFromDb.getDate()).slice(-2);    
+    return date + '.' + month + '.' + year;
+  },
+  reverseList: (list) => {
+    let reversedList = list.reverse();
+    return reversedList;
+  },
+  isEmpty: (searchAdvert) => {
+    let isEmpyBoolean = false;
+    if(searchAdvert) {
+      isEmpyBoolean = true;
+    }
+    return isEmpyBoolean;
+  },
+  isAdmin: (kayttaja_taso) => {
+    let isAdminBoolean = false;
+    if(kayttaja_taso === "admin") {
+      isAdminBoolean = true;
+    }
+    return isAdminBoolean;
+  }
 };

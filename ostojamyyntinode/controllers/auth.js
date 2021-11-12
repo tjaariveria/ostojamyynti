@@ -143,8 +143,8 @@ exports.listUsers = async (req, res, next) => {
 exports.deleteUser = async (req, res, next) => {
   try {
     db.query(
-      "DELETE FROM kayttajat, ilmoitukset WHERE kayttaja_id = ? AND ilmoittaja_id = ?",
-      [req.params.id, req.params.id],
+      "DELETE FROM kayttajat WHERE kayttaja_id = ?",
+      [req.params.id],
       async (error, results) => {
         console.log(results)
         res.redirect("/admin");

@@ -14,6 +14,10 @@
             <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
             <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
             {{/if}}
+            {{#if (isModerator ../user.kayttaja_taso)}}
+            <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+            <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
+            {{/if}}
 
         </div>
     </div>

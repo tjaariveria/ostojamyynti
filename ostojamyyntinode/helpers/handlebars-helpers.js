@@ -54,5 +54,12 @@ module.exports = {
       isAdminBoolean = true;
     }
     return isAdminBoolean;
+  },
+  isModerator: (kayttaja_taso) => {
+    let isModeratorBoolean = false;
+    if(kayttaja_taso === "mod") {
+      isModeratorBoolean = true;
+    }
+    return isModeratorBoolean;
   }
 };

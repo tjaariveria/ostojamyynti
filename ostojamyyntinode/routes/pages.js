@@ -147,6 +147,13 @@ router.post('/newAdvert', [authController.isLoggedIn, authController.newAdvert],
 });
 
 
-router.get('/delete/:id', authController.deleteAdvert);
+router.get('/deleteAdvert/:id', authController.deleteAdvert);
+
+router.get('/editUser/:id', [authController.isLoggedIn, authController.editUser], (req, res) => {
+  res.render('edit-user', {
+    user: req.user,
+    editUser: req.editUser
+  })
+});
 
 module.exports = router;

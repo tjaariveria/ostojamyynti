@@ -9,11 +9,12 @@
         <div>
             <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}} Ilmoitus jätetty: {{formatDate ilmoitus_paivays}}</h5>
 
-            
+
             {{#if (isAdmin ../user.kayttaja_taso)}}
-            <p>jee</p>
+            <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+            <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
             {{/if}}
-            
+
         </div>
     </div>
 </div>

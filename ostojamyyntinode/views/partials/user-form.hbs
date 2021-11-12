@@ -1,0 +1,17 @@
+<div class="registerForm">
+    <form action="/editUser" method="POST">
+        <div>
+            <label for="userName">Käyttäjätunnus: </label>
+            <input type="text" class="form-control" id="kayttaja_tunnus" name="kayttaja_tunnus"
+                placeholder="Käyttäjätunnus" value="{{user.kayttaja_tunnus}}" />
+        </div>
+        <div>
+            <label for="email">Sähköposti: </label>
+            <input type="email" class="form-control" id="kayttaja_sahkoposti" name="kayttaja_sahkoposti"
+                placeholder="Sähköposti" value="{{user.kayttaja_sahkoposti}}" />
+        </div>
+        <div>
+        </div>
+        <button type="submit" class="button">Tallenna</button>
+
+</div>

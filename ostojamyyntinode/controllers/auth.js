@@ -248,7 +248,7 @@ exports.listItems = async (req, res, next) => {
     if (searchAdvert != undefined) {
       db.query(
         "SELECT * FROM ilmoitukset WHERE MATCH(ilmoitus_nimi, ilmoitus_kuvaus) AGAINST (? IN BOOLEAN MODE)",
-        [searchAdvert + "*"],
+        [searchAdvert + '*'],
         async (error, results) => {
           req.list = results;
           req.searchAdvert = searchAdvert;

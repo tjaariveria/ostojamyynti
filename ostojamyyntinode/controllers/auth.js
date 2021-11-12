@@ -130,10 +130,24 @@ exports.editUser = async (req, res, next) => {
 // List Users
 exports.listUsers = async (req, res, next) => {
   try {
+    db.query("SELECT * FROM kayttajat", async (error, results) => {
+      req.users = results;
+      next();
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Delete User
+exports.deleteUser = async (req, res, next) => {
+  try {
     db.query(
-      "SELECT * FROM kayttajat",
+      "DELETE FROM kayttajat, ilmoitukset WHERE kayttaja_id = ? AND ilmoittaja_id = ?",
+      [req.params.id, req.params.id],
       async (error, results) => {
-        req.users = results;
+        console.log(results)
+        res.redirect("/admin");
         next();
       }
     );
@@ -142,8 +156,6 @@ exports.listUsers = async (req, res, next) => {
   }
 };
 
-
-
 // Add Advert
 exports.newAdvert = async (req, res, next) => {
   const { ilmoitus_laji, ilmoitus_nimi, ilmoitus_kuvaus } = req.body;
@@ -151,7 +163,6 @@ exports.newAdvert = async (req, res, next) => {
     req.cookies.jwt,
     process.env.JWT_SECRET
   );
-
   db.query(
     "INSERT INTO ilmoitukset SET ?",
     {
@@ -248,7 +259,7 @@ exports.listItems = async (req, res, next) => {
     if (searchAdvert != undefined) {
       db.query(
         "SELECT * FROM ilmoitukset WHERE MATCH(ilmoitus_nimi, ilmoitus_kuvaus) AGAINST (? IN BOOLEAN MODE)",
-        [searchAdvert + '*'],
+        [searchAdvert + "*"],
         async (error, results) => {
           req.list = results;
           req.searchAdvert = searchAdvert;

@@ -149,6 +149,8 @@ router.post('/newAdvert', [authController.isLoggedIn, authController.newAdvert],
 
 router.get('/deleteAdvert/:id', authController.deleteAdvert);
 
+router.get('/deleteUser/:id', authController.deleteUser);
+
 router.get('/editUser/:id', [authController.isLoggedIn, authController.editUser], (req, res) => {
   res.render('edit-user', {
     user: req.user,

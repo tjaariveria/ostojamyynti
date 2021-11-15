@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const bcrypt = require("bcryptjs");
 
 const db = mysql.createConnection({
     host: process.env.HOST,

@@ -1,5 +1,6 @@
-const express = require("express");
-const authController = require("../controllers/auth");
+const express = require('express');
+const authController = require('../controllers/auth');
+const advertController = require('../controllers/advert');
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ router.get(
   "",
   [
     authController.isLoggedIn,
-    authController.listItems,
+    advertController.listAdverts,
     authController.listUsers,
   ],
   (req, res) => {

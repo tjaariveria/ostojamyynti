@@ -10,11 +10,6 @@ const db = mysql.createConnection({
 
 // Register User
 exports.register = (req, res) => {
-    // const name = req.body.name;
-    // const email = req.body.email;
-    // const password = req.body.password;
-    // const passwordConfirmed = req.body.passwordConfirmed;
-
     const {
         kayttaja_tunnus,
         kayttaja_sahkoposti,
@@ -22,6 +17,7 @@ exports.register = (req, res) => {
         kayttaja_salasana_varmistus,
     } = req.body;
 
+    // Query to check if provided email is already in use 
     db.query(
         "SELECT kayttaja_sahkoposti FROM kayttajat WHERE kayttaja_sahkoposti = ?",
         [kayttaja_sahkoposti],
@@ -38,8 +34,10 @@ exports.register = (req, res) => {
                     message: "Passwords do not match!",
                 });
             }
-
+            // Crypting password with bcrypt
             let hashedPassword = await bcrypt.hash(kayttaja_salasana, 8);
+
+            // Query to set new user in to database
             db.query(
                 "INSERT INTO kayttajat SET ?",
                 {
@@ -52,7 +50,7 @@ exports.register = (req, res) => {
                         console.log("Error in query: " + error);
                     } else {
                         console.log("Result from register: " + results);
-                        return res.render("register", {
+                        return res.status(200).render("register", {
                             message: "User registered!",
                         });
                     }

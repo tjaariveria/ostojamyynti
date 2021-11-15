@@ -1,7 +1,7 @@
-const mysql = require("mysql");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { promisify } = require("util");
+const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { promisify } = require('util');
 
 // Database connection
 const db = mysql.createConnection({
@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
     const { kayttaja_sahkoposti, kayttaja_salasana } = req.body;
 
     if (!kayttaja_sahkoposti || !kayttaja_salasana) {
-      return res.status(400).render("login", {
+      return res.status(400).render('login', {
         message: "Please provide an email and/or password",
       });
     }
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
             results[0].kayttaja_salasana
           ))
         ) {
-          res.status(401).render("login", {
+          res.status(401).render('login', {
             message: "email or password is incorrect",
           });
         } else {
@@ -47,8 +47,8 @@ exports.login = async (req, res) => {
             httpOnly: true,
           };
 
-          res.cookie("jwt", token, cookieOptions);
-          res.status(200).redirect("/");
+          res.cookie('jwt', token, cookieOptions);
+          res.status(200).redirect('/');
         }
       }
     );
@@ -57,11 +57,7 @@ exports.login = async (req, res) => {
   }
 };
 
-
-
-
-
-// Logout
+// Logout and setting jwt to expire in 2 seconds after logout
 exports.logout = async (req, res) => {
   res.cookie("jwt", "logout", {
     expires: new Date(Date.now() + 2 * 1000),
@@ -70,9 +66,7 @@ exports.logout = async (req, res) => {
   res.status(200).redirect("/");
 };
 
-//Middlewares
-
-
+// Check if user is logged in
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
     try {

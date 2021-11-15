@@ -51,7 +51,8 @@ db.connect( (error) => {
 
 // Require routes
 app.use('/', require('./routes/pages'));
-app.use('/auth', require('./routes/auth')); 
+app.use('/auth', require('./routes/auth'));
+app.use('/register', require('./routes/register')); 
 
 // Listening port 3030
 app.listen(3030, () => {

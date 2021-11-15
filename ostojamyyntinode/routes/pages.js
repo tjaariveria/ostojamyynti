@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 const advertController = require('../controllers/advert');
+const userController = require('../controllers/user');
 
 const router = express.Router();
 
@@ -9,14 +10,14 @@ router.get(
   [
     authController.isLoggedIn,
     advertController.listAdverts,
-    authController.listUsers,
+    userController.listUsers,
   ],
   (req, res) => {
     const list = req.list;
     const user = req.user;
     const users = req.users;
     const searchAdvert = req.searchAdvert;
-    res.render("index", {
+    res.render('index', {
       user,
       list,
       users,
@@ -26,18 +27,18 @@ router.get(
 );
 
 router.post(
-  "",
+  '',
   [
     authController.isLoggedIn,
     advertController.listAdverts,
-    authController.listUsers,
+    userController.listUsers,
   ],
   (req, res) => {
     const list = req.list;
     const user = req.user;
     const users = req.users;
     const searchAdvert = req.searchAdvert;
-    res.render("index", {
+    res.render('index', {
       user,
       list,
       users,
@@ -86,9 +87,7 @@ router.post(
   }
 );
 
-router.get("/register", (req, res) => {
-  res.render("register");
-});
+
 
 router.get("/login", (req, res) => {
   res.render("login");
@@ -117,7 +116,7 @@ router.get(
 
 router.get(
   '/admin',
-  [authController.isLoggedIn, authController.listUsers],
+  [authController.isLoggedIn, userController.listUsers],
   (req, res) => {
     if (req.user) {
       res.render('admin', {
@@ -150,9 +149,9 @@ router.post('/newAdvert', [authController.isLoggedIn, advertController.newAdvert
 
 router.get('/deleteAdvert/:id', advertController.deleteAdvert);
 
-router.get('/deleteUser/:id', authController.deleteUser);
+router.get('/deleteUser/:id', userController.deleteUser);
 
-router.get('/editUser/:id', [authController.isLoggedIn, authController.editUser], (req, res) => {
+router.get('/editUser/:id', [authController.isLoggedIn, userController.editUser], (req, res) => {
   res.render('edit-user', {
     user: req.user,
     editUser: req.editUser

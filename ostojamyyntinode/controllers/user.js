@@ -85,14 +85,7 @@ exports.updateUser = async (req, res, next) => {
             "UPDATE kayttajat SET kayttaja_tunnus = ?, kayttaja_sahkoposti = ? WHERE kayttaja_id = ?",
             [kayttaja_tunnus, kayttaja_sahkoposti, req.params.id],
             async (error, results) => {
-                db.query(
-                    "SELECT * FROM kayttajat WHERE kayttaja_id = ?",
-                    [req.params.id],
-                    async (error, results) => {
-                        req.editUser = results;
-                        next();
-                    }
-                );
+                res.status(200).redirect('/profile');
             }
         );
     } catch (error) {

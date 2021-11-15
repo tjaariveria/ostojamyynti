@@ -1,7 +1,46 @@
+@font-face {
+    font-family: OpenDyslexic;
+    src: url("/assets/font/OpenDyslexic.otf") format("opentype");
+}
+
+@media screen and (max-width: 600px) {
+    .itemA, .itemB {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
 body {
     background-color: #EAE7DC;
     border: 0px;
     margin: 0px;
+    font-family: OpenDyslexic;
+}
+
+button {
+    display: inline-block;
+    padding: 0.35em 1.2em;
+    border: 0.1em solid #5f5e5c;
+    margin: 0.5em;
+    border-radius: 0.25em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: OpenDyslexic;
+    font-weight: 300;
+    background: #bba688;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+button:hover {
+    color: #000;
+    background-color: #EAE7DC;
+}
+
+input, select, textarea {
+    width: 80%;
+    padding: 0.25em;
+    margin: 0.4em;
 }
 
 .nav {
@@ -47,7 +86,7 @@ body {
     border-radius: 5px;
 }
 
-.registerForm {
+.universalForm {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
     background-color: #D8C3A5;
     color: #5f5e5c;
@@ -100,22 +139,56 @@ body {
     color: #E85A4F;
 }
 
-button {
-    display: inline-block;
-    padding: 0.35em 1.2em;
-    border: 0.1em solid #5f5e5c;
-    margin: 0 0.3em 0.3em 0;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    background: #bba688;
+.searchBar {
+    padding: 20px;
     text-align: center;
-    transition: all 0.2s;
 }
 
-button:hover {
-    color: #000;
-    background-color: #EAE7DC;
+.profileInformation {
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-top: 20px;
+}
+
+.container-search {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-top: 20px;
+}
+
+.itemA {
+    text-align: right;
+}
+
+.itemB {
+    text-align: left;
+}
+
+.itemC {
+    padding-top: 0.5em;
+    text-align: right;
+}
+
+.itemD {
+    padding-top: 0.4em;
+    text-align: left;
+}
+
+.editUserButton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.editAdvertButton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
 }

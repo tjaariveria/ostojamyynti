@@ -11,18 +11,25 @@
 
 <body>
 
-
-
-    <div style="text-align: center;">
+    <div class="searchBar">
         <form action="/" method="POST">
-        <label for="searchAdvert">Hae ilmoituksista: </label>
-        <input type="text" class="form-control" id="searchAdvert" name="searchAdvert" placeholder="Kirjoita hakusana" />
-        
-        {{#if (isEmpty searchAdvert)}}
-        <button type="submit" class="button">Hae</button><button type="submit" class="button">Tyhjennä</button>
-        {{else}}
-        <button type="submit" class="button">Hae</button>
-        {{/if}}
+            <div class="container-search">
+                
+                <div class="itemC">
+                    <label for="searchAdvert">Hae ilmoituksista: </label>
+                    </div>
+                    <div class="itemD">
+                    <input type="text" id="searchAdvert" name="searchAdvert" placeholder="Kirjoita hakusana" />
+                </div>
+                <div class="itemB">
+                    {{#if (isEmpty searchAdvert)}}
+                    <button type="submit" class="button">Hae</button><button type="submit"
+                        class="button">Tyhjennä</button>
+                    {{else}}
+                    <button type="submit" class="button">Hae</button>
+                    {{/if}}
+                </div>
+            </div>
         </form>
     </div>
 

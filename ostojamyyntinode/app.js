@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const fileUpload = require('express-fileupload');
 const mysql = require('mysql');
 const cookieParser = require('cookie-parser');
 
@@ -14,6 +15,9 @@ const db = mysql.createConnection({
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 });
+
+// Settings for fileupload
+app.use(fileUpload());
 
 // const publicDirectory = path.join(__dirname, './public');
 // app.use(express.static(publicDirectory));

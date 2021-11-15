@@ -77,6 +77,29 @@ exports.editUser = async (req, res, next) => {
     }
 };
 
+// Update User
+exports.updateUser = async (req, res, next) => {
+    const { kayttaja_tunnus, kayttaja_sahkoposti } = req.body;
+    try {
+        db.query(
+            "UPDATE kayttajat SET kayttaja_tunnus = ?, kayttaja_sahkoposti = ? WHERE kayttaja_id = ?",
+            [kayttaja_tunnus, kayttaja_sahkoposti, req.params.id],
+            async (error, results) => {
+                db.query(
+                    "SELECT * FROM kayttajat WHERE kayttaja_id = ?",
+                    [req.params.id],
+                    async (error, results) => {
+                        req.editUser = results;
+                        next();
+                    }
+                );
+            }
+        );
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 // List Users
 exports.listUsers = async (req, res, next) => {
     try {

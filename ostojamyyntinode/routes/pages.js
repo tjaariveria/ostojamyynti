@@ -3,8 +3,14 @@ const authController = require('../controllers/auth');
 const advertController = require('../controllers/advert');
 const userController = require('../controllers/user');
 
+
+
+
+
 const router = express.Router();
 
+
+// Get index page with list of all Adverts in database
 router.get(
   "",
   [
@@ -26,6 +32,7 @@ router.get(
   }
 );
 
+// Index page with list of found Adverts if any
 router.post(
   '',
   [
@@ -47,6 +54,7 @@ router.post(
   }
 );
 
+// Get Advert information for edit
 router.get(
   "/editAdvert/:id",
   [
@@ -67,6 +75,7 @@ router.get(
   }
 );
 
+// Update Advert information
 router.post(
   "/editAdvert/:id",
   [
@@ -88,17 +97,12 @@ router.post(
 );
 
 
-
+// Get to Login page
 router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/list", advertController.listAdverts, (req, res) => {
-  res.render("list", {
-    list: req.list,
-  });
-});
-
+// Get to Profile page
 router.get(
   "/profile",
   [authController.isLoggedIn, advertController.listUserAdverts],
@@ -114,6 +118,7 @@ router.get(
   }
 );
 
+// Get to Admin page
 router.get(
   '/admin',
   [authController.isLoggedIn, userController.listUsers],
@@ -131,26 +136,27 @@ router.get(
 
 
 
-
+// Get to new Advert page
 router.get('/newAdvert', [authController.isLoggedIn], (req, res) => {
-  // const user = req.user;
   res.render('new-advert', {
     user: req.user
   });
 });
 
+// Creates new Advert
 router.post('/newAdvert', [authController.isLoggedIn, advertController.newAdvert], (req, res) => {
-  // const user = req.user;
   res.render('new-advert', {
     user: req.user
   });
 });
 
-
+// Delete Advert from database
 router.get('/deleteAdvert/:id', advertController.deleteAdvert);
 
+// Delete User from database. This also deletes all Adverts related to this user
 router.get('/deleteUser/:id', userController.deleteUser);
 
+// Get information to edit User
 router.get('/editUser/:id', [authController.isLoggedIn, userController.editUser], (req, res) => {
   res.render('edit-user', {
     user: req.user,
@@ -158,4 +164,14 @@ router.get('/editUser/:id', [authController.isLoggedIn, userController.editUser]
   })
 });
 
-module.exports = router;
+// Updates User information
+router.post('/editUser/:id', [authController.isLoggedIn, userController.updateUser], (req, res) => {
+  res.render('edit-user', {
+    user: req.user,
+    editUser: req.editUser
+  })
+});
+
+
+
+module.exports = router; 

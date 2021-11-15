@@ -11,6 +11,7 @@ const db = mysql.createConnection({
   database: process.env.DATABASE,
 });
 
+
 exports.login = async (req, res) => {
   try {
     const { kayttaja_sahkoposti, kayttaja_salasana } = req.body;

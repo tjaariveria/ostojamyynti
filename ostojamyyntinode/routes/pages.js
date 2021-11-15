@@ -29,7 +29,7 @@ router.post(
   "",
   [
     authController.isLoggedIn,
-    authController.listItems,
+    advertController.listAdverts,
     authController.listUsers,
   ],
   (req, res) => {
@@ -50,7 +50,7 @@ router.get(
   "/editAdvert/:id",
   [
     authController.isLoggedIn,
-    authController.editAdvert    
+    advertController.editAdvert
   ],
   (req, res) => {
     const user = req.user;
@@ -58,7 +58,7 @@ router.get(
     if (advert) {
       res.render('edit-advert', {
         user,
-        advert        
+        advert
       });
     } else {
       res.redirect('/login');
@@ -70,7 +70,7 @@ router.post(
   "/editAdvert/:id",
   [
     authController.isLoggedIn,
-    authController.updateAdvert    
+    advertController.updateAdvert
   ],
   (req, res) => {
     const user = req.user;
@@ -78,7 +78,7 @@ router.post(
     if (advert) {
       res.render('edit-advert', {
         user,
-        advert        
+        advert
       });
     } else {
       res.redirect('/login');
@@ -94,7 +94,7 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/list", authController.listItems, (req, res) => {
+router.get("/list", advertController.listAdverts, (req, res) => {
   res.render("list", {
     list: req.list,
   });
@@ -102,7 +102,7 @@ router.get("/list", authController.listItems, (req, res) => {
 
 router.get(
   "/profile",
-  [authController.isLoggedIn, authController.listUserItems],
+  [authController.isLoggedIn, advertController.listUserAdverts],
   (req, res) => {
     if (req.list) {
       res.render("profile", {
@@ -140,7 +140,7 @@ router.get('/newAdvert', [authController.isLoggedIn], (req, res) => {
   });
 });
 
-router.post('/newAdvert', [authController.isLoggedIn, authController.newAdvert], (req, res) => {
+router.post('/newAdvert', [authController.isLoggedIn, advertController.newAdvert], (req, res) => {
   // const user = req.user;
   res.render('new-advert', {
     user: req.user
@@ -148,7 +148,7 @@ router.post('/newAdvert', [authController.isLoggedIn, authController.newAdvert],
 });
 
 
-router.get('/deleteAdvert/:id', authController.deleteAdvert);
+router.get('/deleteAdvert/:id', advertController.deleteAdvert);
 
 router.get('/deleteUser/:id', authController.deleteUser);
 

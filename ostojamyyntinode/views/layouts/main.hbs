@@ -17,10 +17,10 @@
             {{#if user}}
                 <li><a href="/newAdvert">Lisää ilmoitus</a></li>
                 <li><a href="/profile">Profiili</a></li>
-                <li><a href="/auth/logout">Kirjaudu ulos</a></li>
                 {{#if (isAdmin user.kayttaja_taso)}}
                 <li><a href="/admin">Hallinta paneeli</a></li>
                 {{/if}}
+                <li><a href="/auth/logout">Kirjaudu ulos</a></li>                
             {{else}}
                 <li><a href="/login">Kirjaudu</a></li>
                 <li><a href="/register">Rekisteröidy</a></li>

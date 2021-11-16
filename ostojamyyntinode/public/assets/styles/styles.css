@@ -161,6 +161,13 @@ input, select, textarea {
     padding-top: 20px;
 }
 
+.container-advertBottom {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .itemA {
     text-align: right;
 }
@@ -179,6 +186,24 @@ input, select, textarea {
     text-align: left;
 }
 
+.itemE {
+    text-align: center;
+}
+
+.two-col-header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 0;
+    grid-row-end: 1;
+}
+
+.loginButton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;    
+}
+
 .editUserButton {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -191,4 +216,11 @@ input, select, textarea {
     grid-column-end: 3;
     grid-row-start: 4;
     grid-row-end: 5;
+}
+
+.registerButton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 5;
+    grid-row-end: 6;
 }

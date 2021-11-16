@@ -1,51 +1,49 @@
 <html lang="fi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/assets/styles/styles.css" />
-    <title>Osto ja myyntikanava</title>
-  </head>
-  <body>
-    
 
-    <div>
-      <div class="registerForm">
-        <h1>Kirjaudu palveluun</h1>
-        <form action="/auth/login" method="POST">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/styles/styles.css" />
+  <title>Osto ja myyntikanava</title>
+</head>
 
-          <div>
-            <label for="email">Sähköposti: </label>
-            <input
-              type="email"
-              class="form-control"
-              id="kayttaja_sahkoposti"
-              name="kayttaja_sahkoposti"
-              placeholder="Sähköposti"
-            />
-          </div>
+<body>
 
-          <div>
-            <label for="password">Salasana: </label>
-            <input
-              type="password"
-              class="form-control"
-              id="kayttaja_salasana"
-              name="kayttaja_salasana"
-              placeholder="Salasana"
-            />
-          </div>
+  <br>
 
+  <div class="universalForm">
+    <form action="/auth/login" method="POST">
+      <div class="container">
+        <div class="two-col-header">
+          <h1>Kirjaudu palveluun</h1>
+        </div>
+        <div class="itemA">
+          <label for="email">Sähköposti: </label>
+        </div>
+        <div class="itemB">
+          <input type="email" class="form-control" id="kayttaja_sahkoposti" name="kayttaja_sahkoposti"
+            placeholder="Sähköposti" />
+        </div>
+        <div class="itemA">
+          <label for="password">Salasana: </label>
+        </div>
+        <div class="itemB">
+          <input type="password" class="form-control" id="kayttaja_salasana" name="kayttaja_salasana"
+            placeholder="Salasana" />
+        </div>
+        <div class="loginButton">
           <button type="submit" class="button">Kirjaudu</button>
-        </form>
+        </div>
       </div>
-    </div>
+    </form>
+  </div>
+  <div>
+    {{#if message}}
+    <h4 class="alert">{{message}}</h4>
+    {{/if}}
+  </div>
 
-    <div>
-        {{#if message}}
-        <h4 class="alert">{{message}}</h4>
-        {{/if}}
-    </div>
+</body>
 
-  </body>
 </html>

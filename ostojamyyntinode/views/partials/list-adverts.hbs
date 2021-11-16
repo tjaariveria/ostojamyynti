@@ -1,24 +1,35 @@
 {{#if list}}
 {{#each (reverseList list)}}
 <div class="ilmoitukset">
-    <div class="ilmoitus" key={{ilmoitus_id}}>
-        <div>
-            <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
-            <h3>{{ilmoitus_kuvaus}}</h3>
-        </div>
-        <div>
-            <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}} Ilmoitus jätetty: {{formatDate ilmoitus_paivays}}</h5>
+    <div class="container-adverts">
+        <div class="ilmoitus" key={{ilmoitus_id}}>
+            <div>
+                <h1>{{ilmoitusLaji ilmoitus_laji}}: {{ilmoitus_nimi}} </h1>
+                <h3>{{ilmoitus_kuvaus}}</h3>
+            </div>
+            <div>
 
+            </div>
+            <div class="container-advertBottom">
+                <div class="itemB">
+                    <h5>Ilmoittaja: {{findUser ../users ilmoittaja_id}}</h5>
 
-            {{#if (isAdmin ../user.kayttaja_taso)}}
-            <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
-            <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
-            {{/if}}
-            {{#if (isModerator ../user.kayttaja_taso)}}
-            <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
-            <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
-            {{/if}}
+                </div>
 
+                <div class="itemA">
+                    <h5>Ilmoitus jätetty: {{formatDate ilmoitus_paivays}}</h5>
+                </div>
+            </div>
+            <div>
+                {{#if (isAdmin ../user.kayttaja_taso)}}
+                <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+                <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
+                {{/if}}
+                {{#if (isModerator ../user.kayttaja_taso)}}
+                <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+                <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>

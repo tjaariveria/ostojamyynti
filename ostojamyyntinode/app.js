@@ -19,9 +19,6 @@ const db = mysql.createConnection({
 // Settings for fileupload
 app.use(fileUpload());
 
-// const publicDirectory = path.join(__dirname, './public');
-// app.use(express.static(publicDirectory));
-
 // Parsing middleware
 // Parse application/x-www-fomr-urlencoded
 app.use(express.urlencoded({ extended: false }));

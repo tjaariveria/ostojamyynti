@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/styles/style.css" />
+    <title>Osto ja myyntikanava</title>
+</head>
+
+<body>
+    <div class="nav">
+        <h3>Osto ja myyntikanava</h3>
+        <ul>
+            <li><a href="/"></a>Etusivu</li>
+            <li><a href="/login"></a>Kirjaudu</li>
+            <li><a href="/register"></a>Rekisteröidy</li>
+        </ul>
+    </div>
+
+    <div>
+        <div class="universalForm">
+            <h1>Rekisteröidy</h1>
+            <form action="/register" method="POST">
+                <div>
+                    <label for="userName">Käyttäjätunnus: </label>
+                    <input type="text" name="kayttaja_tunnus" id="kayttaja_tunnus" class="form-control"
+                        placeholder="Käyttäjätunnus" />
+                </div>
+
+                <div>
+                    <label for="email">Sähköposti: </label>
+                    <input type="email" name="kayttaja_sahkoposti" id="kayttaja_sahkoposti" class="form-control"
+                        placeholder="Sähköposti" />
+                </div>
+
+                <div>
+                    <label for="password">Salasana: </label>
+                    <input type="password" name="kayttaja_salasana" id="kayttaja_salasana" class="form-control"
+                        placeholder="Salasana" />
+                </div>
+
+                <button type="submit" class="button">Rekisteröidy</button>
+
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

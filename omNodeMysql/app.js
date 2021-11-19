@@ -18,9 +18,10 @@ app.use(express.static('public'));
 app.set('view engine', 'hbs');
 
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+
+// Require routes
+app.use('/', require('./routes/page.routes'));
+app.use('/register', require('./routes/register.routes')); 
 
 app.listen(3030, () => {
     console.log("Server listening port 3030");

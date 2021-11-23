@@ -17,7 +17,10 @@ app.use(express.static('public'));
 
 app.set('view engine', 'hbs');
 
-
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({ extended: false }));
+// Parse JSON bodies (as sent by API client)
+app.use(express.json());
 
 // Require routes
 app.use('/', require('./routes/page.routes'));

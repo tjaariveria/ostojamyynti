@@ -1,30 +1,43 @@
-const express = require('express');
-const mysql = require('mysql');
-const exphbs = require('express-handlebars');
+import express, { urlencoded, json } from 'express';
+import { create } from 'express-handlebars';
+import { createConnection } from 'mysql';
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
+import pages from './routes/page.routes.js';
 
-require('dotenv').config();
+
+dotenv.config();
 
 const app = express();
+const hbs = create({ extname: '.hbs'});
 
-const db = mysql.createConnection({
+const db = createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE
 });
 
+
+
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(urlencoded({ extended: false }));
+
+// Parse JSON bodies (as sent by API client)
+app.use(json());
+
+app.use(cookieParser());
+
 app.use(express.static('public'));
+
+app.engine('hbs', hbs.engine);
 
 app.set('view engine', 'hbs');
 
-// Parse URL-encoded bodies (as sent by HTML forms)
-app.use(express.urlencoded({ extended: false }));
-// Parse JSON bodies (as sent by API client)
-app.use(express.json());
-
 // Require routes
-app.use('/', require('./routes/page.routes'));
-app.use('/register', require('./routes/register.routes')); 
+app.use('/', pages);
+app.use('/register', express('./routes/register.routes'));
+app.use('/auth', express('./routes/auth.routes')); 
 
 app.listen(3030, () => {
     console.log("Server listening port 3030");

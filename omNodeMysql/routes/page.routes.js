@@ -1,17 +1,17 @@
-const express = require('express');
+import express from'express';
 
-const router = express.Router();
+const routes = express.Router();
 
-router.get('/', (req, res) => {
+routes.get('/', (req, res) => {
     res.render('index');
 });
 
-router.get('/register', (req, res) => {
+routes.get('/register', (req, res) => {
     res.render('register');
 });
 
-router.get('/login', (req, res) => {
+routes.get('/login', (req, res) => {
     res.render('login');
 });
 
-module.exports = router;
+export default  routes;

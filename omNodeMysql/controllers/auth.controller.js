@@ -1,33 +1,58 @@
 const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { promisify } = require('util');
 
+// Database connection
 const db = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
-    database: process.env.DATABASE
+    database: process.env.DATABASE,
 });
 
-exports.register = (req, res) => {
-    console.log(req.body);
-    // const name = req.body.name;
-    // const email = req.body.email;
-    // const password = req.body.password;
-    // const passwordConfirmed = req.body.passwordConfirmed;
+// Login authentication
+exports.login = async (req, res) => {
+    try {
+        const { kayttaja_sahkoposti, kayttaja_salasana } = req.body;
 
-    const { name, email, password, passwordConfirmed } = req.body;
+        if (!kayttaja_sahkoposti || !kayttaja_salasana) {
+            return res.status(400).render('login', {
+                message: "Please provide an email and/or password",
+            });
+        }
+        db.query(
+            "SELECT * FROM kayttajat WHERE kayttaja_sahkoposti = ?",
+            [kayttaja_sahkoposti],
+            async (error, results) => {
+                if (
+                    !results ||
+                    !(await bcrypt.compare(
+                        kayttaja_salasana,
+                        results[0].kayttaja_salasana
+                    ))
+                ) {
+                    res.status(401).render('login', {
+                        message: "email or password is incorrect",
+                    });
+                } else {
+                    const id = results[0].kayttaja_id;
+                    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+                        expiresIn: process.env.JWT_EXPIRES_IN,
+                    });
+                    const cookieOptions = {
+                        expires: new Date(
+                            Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+                        ),
+                        httpOnly: true,
+                    };
 
-    db.query('SELECT email FROM users WHERE email = ?', [email], (error, results => {
-        if(error) {
-            console.log(error);
-        }
-        if(results.lenght > 0) {
-            return res.render('register', {
-                message: 'Email is already in use!'
-            })
-        } else if (password !== passwordConfirmed) {
-            return res.render('register', {
-                message: 'Passwords do not match!'
-            })
-        }
-    }))    
-}
+                    res.cookie('jwt', token, cookieOptions);
+                    res.status(200).redirect('/');
+                }
+            }
+        );
+    } catch (error) {
+        console.log(error);
+    }
+};

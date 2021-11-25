@@ -1,14 +1,47 @@
-import express from 'express';
-import { engine } from 'express-handlebars';
+import express, { urlencoded, json } from 'express';
+import mysql from 'mysql';
+import dotenv from 'dotenv';
+import { create } from 'express-handlebars';
+import pages from './routes/page.routes.js';
+import register from './routes/register.routes.js';
+import auth from './routes/auth.routes.js'; 
+
+dotenv.config();
 
 const app = express();
 
-app.engine('hbs', engine());
-app.set('view engine', 'hbs');
-app.set("views", "./views");
+const hbs = create({ extname: '.hbs'});
 
-app.get('/', (req, res) => {
-    res.render('home');
+const db = mysql.createConnection({
+    host: process.env.HOST,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    database: process.env.DATABASE
 });
 
-app.listen(3000);
+app.use(express.static('public'));
+
+app.engine('hbs', hbs.engine);
+
+app.set('view engine', 'hbs');
+
+app.use(urlencoded({ extended: false }));
+
+app.use(json());
+
+app.use('/', pages);
+app.use('/register', register);
+app.use('/auth', auth);
+
+app.listen(3030, () => {
+    console.log("Server started on port 3030");
+    db.connect( (error) => {
+        if(error) {
+            console.log(error);
+        } else {
+            console.log("Connected to database");
+        }
+    });
+});
+
+export default db;

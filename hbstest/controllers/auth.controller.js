@@ -1,6 +1,7 @@
 import db from '../app.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { promisify } from 'util';
 
 const login = async (req, res) => {
     try {
@@ -47,4 +48,41 @@ const login = async (req, res) => {
     }
 };
 
+const isLoggedIn = async (req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            const decoded = await promisify(jwt.verify)(
+                req.cookies.jwt,
+                process.env.JWT_SECRET
+            );
+            //Check if user exist
+            db.query(
+                "SELECT * FROM kayttajat WHERE kayttaja_id = ?",
+                [decoded.id],
+                (error, results) => {
+                    if (!results) {
+                        return next();
+                    }
+                    req.user = results[0];
+                    return next();
+                }
+            );
+        } catch (error) {
+            console.log("Error in login query: " + error);
+            return next();
+        }
+    } else {
+        next();
+    }
+};
+
+const logout = async (req, res) => {
+    res.cookie('jwt', 'logout', {
+        expires: new Date(Date.now() + 2 * 1000),
+        httpOnly: true,
+    });
+    res.status(200).redirect('/');
+};
+
 export default login;
+export { isLoggedIn, logout };

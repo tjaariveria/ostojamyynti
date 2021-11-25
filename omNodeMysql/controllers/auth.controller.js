@@ -16,7 +16,7 @@ const login = async (req, res) => {
 
         if (!kayttaja_sahkoposti || !kayttaja_salasana) {
             return res.status(400).render('login', {
-                message: "Please provide an email and/or password",
+                message: "Anna käyttäjätunnus ja/tai salasana!",
             });
         }
         db.query(
@@ -33,7 +33,7 @@ const login = async (req, res) => {
                     ))
                 ) {
                     res.status(401).render('login', {
-                        message: "email or password is incorrect",
+                        message: "Väärä sähköposti tai salasana!",
                     });
                 } else {
                     const id = results[0].kayttaja_id;

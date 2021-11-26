@@ -1,0 +1,26 @@
+{{#each (reverseList list)}}
+<div class="ilmoitukset">
+    <div>
+        <div class="ilmoitus" key={{ilmoitus_id}}>
+            <div>
+                <h1>{{advertType ilmoitus_laji}}: {{ilmoitus_nimi}} </h1>
+                <h3>{{ilmoitus_kuvaus}}</h3>
+            </div>
+            <div>
+
+            </div>
+            <div class="container-advertBottom">
+                <div class="itemB">
+                    <h5>Ilmoittaja: {{getUser ../users ilmoittaja_id}}</h5>
+                </div>
+
+                <div class="itemA">
+                    <h5>Ilmoitus jätetty: {{formatDate ilmoitus_paivays}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+

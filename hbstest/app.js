@@ -5,13 +5,17 @@ import { create } from 'express-handlebars';
 import cookieParser from 'cookie-parser';
 import pages from './routes/page.routes.js';
 import register from './routes/register.routes.js';
-import auth from './routes/auth.routes.js'; 
+import auth from './routes/auth.routes.js';
+import hbsHelpers from './helpers/handlebars-helpers.js';
 
 dotenv.config();
 
 const app = express();
 
-const hbs = create({ extname: '.hbs'});
+const hbs = create({
+    extname: '.hbs',
+    helpers: hbsHelpers
+});
 
 const db = mysql.createConnection({
     host: process.env.HOST,

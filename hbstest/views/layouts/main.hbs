@@ -15,10 +15,11 @@
         <ul>
             <li><a href="/">Etusivu</a></li>
             {{#if user}}
-                <li><a href="/auth/logout">Kirjaudu ulos</a></li>                
+            <li><a href="/profile">Profiili</a></li>
+            <li><a href="/auth/logout">Kirjaudu ulos</a></li>
             {{else}}
-                <li><a href="/login">Kirjaudu</a></li>
-                <li><a href="/register">Rekisteröidy</a></li>
+            <li><a href="/login">Kirjaudu</a></li>
+            <li><a href="/register">Rekisteröidy</a></li>
             {{/if}}
         </ul>
     </div>

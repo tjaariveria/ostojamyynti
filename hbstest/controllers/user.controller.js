@@ -1,7 +1,7 @@
 import db from '../app.js';
 import bcrypt from 'bcryptjs';
 
-const register = (req, res) => {
+const registerUser = (req, res) => {
     // const kayttaja_tunnus = req.body.kayttaja_tunnus;
     // const kayttaja_sahkoposti = req.body.kayttaja_sahkoposti;
     // const kayttaja_salasana = req.body.kayttaja_salasana;
@@ -54,4 +54,16 @@ const register = (req, res) => {
     );
 }
 
-export default register;
+const listUsers = async (req, res, next) => {
+    try {
+        db.query("SELECT * FROM kayttajat", async (error, results) => {
+            req.users = results;
+            next();
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export default registerUser;
+export { listUsers };

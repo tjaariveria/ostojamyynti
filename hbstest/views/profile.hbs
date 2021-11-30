@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="profile">
     <h2 style="text-align: center;">Omat tiedot</h2>
     <div class="container">
@@ -9,11 +10,20 @@
         <div class="itemA">
             <a href="/editUser/{{user.kayttaja_id}}"><button class="button">Muokkaa omia tietoja</button></a>
         </div>
+=======
+<div class="container">
+    <div class="itemA">
+    </div>
+    <div class="itemA">
+        <h4>Kirjautuneena: {{user.kayttaja_tunnus}}</h4>
+        <a href="/editUser/{{user.kayttaja_id}}"><button class="button">Muokkaa</button></a>
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
     </div>
 </div>
 
 <div class="row">
     <div class="col-8">
+<<<<<<< HEAD
         <h2 style="text-align: center;">Omat ilmoitukset</h2>
         <div>
             {{#each (reverseList list)}}
@@ -29,6 +39,26 @@
                 </div>
             </div>
             {{/each}}
+=======
+        <div class="card-profile-text">
+            <div class="card-profile-title">
+                <h2 style="text-align: center;">Omat ilmoitukset</h2>
+            </div>
+            <div>
+                {{#list}}
+                <div class="ilmoitukset">
+                    <div class="ilmoitus" key={{ilmoitus_id}}>
+                        <div>
+                            <h1>{{advertType ilmoitus_laji}}: {{ilmoitus_nimi}}</h1>
+                            <h3>{{ilmoitus_kuvaus}}</h3>
+                            <a href="/editAdvert/{{ilmoitus_id}}"><button class="button">Muokkaa</button></a>
+                            <a href="/deleteAdvert/{{ilmoitus_id}}"><button class="button">Poista</button></a>
+                        </div>
+                    </div>
+                </div>
+                {{/list}}
+            </div>
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
         </div>
     </div>
 </div>

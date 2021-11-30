@@ -1,5 +1,9 @@
 let hbsHelpers = {
+<<<<<<< HEAD
     advertType: (ilmoitus_laji) => {
+=======
+    advertType: function (ilmoitus_laji) {
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
         let ilmoitusLaji = "";
         if (ilmoitus_laji === 2) {
             ilmoitusLaji = "Ostetaan";
@@ -8,6 +12,7 @@ let hbsHelpers = {
         }
         return ilmoitusLaji;
     },
+<<<<<<< HEAD
     selectAdvertType: (ilmoitus_laji) => {
         let ilmoitusLajiBoolean = false;
         if (ilmoitus_laji === 2) {
@@ -15,6 +20,8 @@ let hbsHelpers = {
         }
         return ilmoitusLajiBoolean;
     },
+=======
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
     formatDate: (ilmoitus_paivays) => {
         let dateFromDb = ilmoitus_paivays;
         let year = dateFromDb.getFullYear();
@@ -34,6 +41,7 @@ let hbsHelpers = {
     reverseList: (list) => {
         let reversedList = list.reverse();
         return reversedList;
+<<<<<<< HEAD
     },
     isEmpty: (searchAdvert) => {
         let isEmpyBoolean = false;
@@ -41,6 +49,8 @@ let hbsHelpers = {
             isEmpyBoolean = true;
         }
         return isEmpyBoolean;
+=======
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
     }
 }
 

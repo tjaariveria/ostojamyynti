@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
 const listAdverts = async (req, res, next) => {
+<<<<<<< HEAD
     let { searchAdvert } = req.body;
     if (searchAdvert === "") {
         searchAdvert = undefined;
@@ -24,6 +25,13 @@ const listAdverts = async (req, res, next) => {
                 next();
             });
         }
+=======
+    try {
+        db.query("SELECT * FROM ilmoitukset", async (error, results) => {
+            req.list = results;
+            next();
+        });
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d
     } catch (error) {
         console.log(error);
     }
@@ -48,6 +56,7 @@ const listUserAdverts = async (req, res, next) => {
     }
 };
 
+<<<<<<< HEAD
 const newAdvert = async (req, res, next) => {
     const { ilmoitus_laji, ilmoitus_nimi, ilmoitus_kuvaus } = req.body;
     const decoded = await promisify(jwt.verify)(
@@ -131,3 +140,7 @@ const deleteAdvert = async (req, res, next) => {
 
 export default listAdverts;
 export { listUserAdverts, newAdvert, getAdvert, updateAdvert, deleteAdvert };
+=======
+export default listAdverts;
+export { listUserAdverts };
+>>>>>>> ab3ca40823a3aeb0e307beeac213304a9c49560d

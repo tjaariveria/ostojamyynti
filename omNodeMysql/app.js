@@ -1,9 +1,10 @@
 import express, { urlencoded, json } from 'express';
 import { create } from 'express-handlebars';
-import { createConnection } from 'mysql';
+import mysql from 'mysql';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import pages from './routes/page.routes.js';
+import pages from './routes/page.routes';
+import auth from './routes/auth.routes';
 
 
 dotenv.config();
@@ -11,7 +12,7 @@ dotenv.config();
 const app = express();
 const hbs = create({ extname: '.hbs'});
 
-const db = createConnection({
+const db = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
@@ -37,7 +38,7 @@ app.set('view engine', 'hbs');
 // Require routes
 app.use('/', pages);
 app.use('/register', express('./routes/register.routes'));
-app.use('/auth', express('./routes/auth.routes')); 
+app.use('/auth', auth); 
 
 app.listen(3030, () => {
     console.log("Server listening port 3030");
@@ -49,3 +50,5 @@ app.listen(3030, () => {
         }
     });
 });
+
+export default db;

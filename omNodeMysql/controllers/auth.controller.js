@@ -1,43 +1,43 @@
-const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { promisify } = require('util');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import { promisify } from 'util';
+import db from '../app';
 
-// Database connection
-const db = mysql.createConnection({
-    host: process.env.HOST,
-    user: process.env.USER,
-    password: process.env.PASSWORD,
-    database: process.env.DATABASE,
-});
+const { sign } = jwt;
+const { compare } = bcrypt;
+
+
+
 
 // Login authentication
-exports.login = async (req, res) => {
+const login = async (req, res) => {
     try {
         const { kayttaja_sahkoposti, kayttaja_salasana } = req.body;
 
         if (!kayttaja_sahkoposti || !kayttaja_salasana) {
             return res.status(400).render('login', {
-                message: "Please provide an email and/or password",
+                message: "Anna käyttäjätunnus ja/tai salasana!",
             });
         }
         db.query(
             "SELECT * FROM kayttajat WHERE kayttaja_sahkoposti = ?",
             [kayttaja_sahkoposti],
             async (error, results) => {
+                console.log(kayttaja_sahkoposti)
+                console.log(results)
                 if (
                     !results ||
-                    !(await bcrypt.compare(
+                    !(await compare(
                         kayttaja_salasana,
                         results[0].kayttaja_salasana
                     ))
                 ) {
                     res.status(401).render('login', {
-                        message: "email or password is incorrect",
+                        message: "Väärä sähköposti tai salasana!",
                     });
                 } else {
                     const id = results[0].kayttaja_id;
-                    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+                    const token = sign({ id }, process.env.JWT_SECRET, {
                         expiresIn: process.env.JWT_EXPIRES_IN,
                     });
                     const cookieOptions = {
@@ -56,3 +56,35 @@ exports.login = async (req, res) => {
         console.log(error);
     }
 };
+
+// Check if user is logged in
+const isLoggedIn = async (req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            const decoded = await promisify(jwt.verify)(
+                req.cookies.jwt,
+                process.env.JWT_SECRET
+            );
+            //Check if user exist
+            db.query(
+                "SELECT * FROM kayttajat WHERE kayttaja_id = ?",
+                [decoded.id],
+                (error, results) => {
+                    if (!results) {
+                        return next();
+                    }
+                    req.user = results[0];
+                    return next();
+                }
+            );
+        } catch (error) {
+            console.log("Error in login query: " + error);
+            return next();
+        }
+    } else {
+        next();
+    }
+};
+
+export default login;
+export { isLoggedIn };

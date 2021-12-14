@@ -14,6 +14,12 @@ const registerUser = (req, res) => {
         kayttaja_salasana_varmistus,
     } = req.body;
 
+    if (!kayttaja_tunnus || !kayttaja_sahkoposti || !kayttaja_salasana) {
+        return res.render('register', {
+            message: "Täytä kaikki kentät!"
+        })
+    }
+
     db.query(
         "SELECT kayttaja_sahkoposti FROM kayttajat WHERE kayttaja_sahkoposti = ?",
         [kayttaja_sahkoposti],
